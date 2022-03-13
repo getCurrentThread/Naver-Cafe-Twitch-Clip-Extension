@@ -1,0 +1,59 @@
+{
+    "manifest_version": 3,
+    "name": "네이버 카페 트위치 클립 로더Naver Cafe Twitch Clip Loader",
+    "description": "네이버 카페에 게시된 트위치 클립을 임베디드 형태로 불러올 수 있습니다.",
+    "homepage_url": "https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader",
+    "version": "0.0.3",
+    "author": "nomomo",
+    "action": {
+      "default_icon": "images/thumbnail.png",
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "images/thumbnail.png",
+      "48": "images/thumbnail.png",
+      "128": "images/thumbnail.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "storage"
+    ],
+    "host_permissions": [
+      "https://cafe.naver.com/"
+    ],
+    "web_accessible_resources":[
+      {
+        "matches": ["<all_urls>"],
+        "resources": [
+          "lib/jquery-3.6.0.min.js",
+          "lib/bootstrap.min.css",
+          "lib/arrive.js",
+          "utils.js",
+          "popup.html",
+          "popup.js",
+          "welcome.html",
+          "welcome.js"
+        ]
+      }
+    ],
+    "content_scripts": [
+      {
+        "matches": [
+          "https://cafe.naver.com/*"
+        ],
+        "css": [
+          "inject.css"
+        ],
+        "js": [
+          "lib/jquery-3.6.0.min.js",
+          "lib/arrive.js",
+          "utils.js",
+          "content_script.js"
+        ],
+        "run_at": "document_idle"
+      }
+    ]
+  }
+  

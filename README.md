@@ -9,25 +9,12 @@
 
 ![Preview](https://raw.githubusercontent.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/master/images/NCTCL_preview_01.png)
 
-- Toolbar 의 Tampermonkey 아이콘 - Naver-Cafe-Twitch-Clip-Loader - 상세 설정 열기를 클릭하여 설정을 변경할 수 있습니다.
-
 ![Open Settings Menu](https://raw.githubusercontent.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/master/images/NCTCL_preview_02.png)
 
 ![Settings](https://raw.githubusercontent.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/master/images/NCTCL_preview_03.png)
 
 ## Install
 
-### STEP 1. ScriptManager
-
-자신의 브라우저에 맞는 유저스크립트 관리 확장기능 설치 (동작 테스트는 Chrome, Firefox 에서만 했습니다.)
-
-- Firefox - [Tampermonkey](https://addons.mozilla.org/ko/firefox/addon/tampermonkey/)
-- Chrome - [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-- Opera - [Tampermonkey](https://addons.opera.com/extensions/details/tampermonkey-beta/)
-- Safari - [Tampermonkey](https://safari.tampermonkey.net/tampermonkey.safariextz)
-- Edge - [Tampermonkey](https://www.microsoft.com/store/p/tampermonkey/9nblggh5162s)
-
-> 본 스크립트는 Tampermonkey 외의 스크립트 매니저에서는 정상 동작하지 않을 수 있습니다.
 
 ### STEP 2. UserScript
 
@@ -44,6 +31,10 @@
 - nomotg@gmail.com
 
 ## Change log
+
+### 0.0.3 (Mar. 14, 2022)
+
+- 단일 익스텐션으로 구조 변경
 
 ### 0.0.2 (Mar. 02, 2022)
 

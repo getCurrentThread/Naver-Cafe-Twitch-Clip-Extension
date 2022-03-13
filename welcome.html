@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Naver-Cafe-Twitch-Clip-Loader 상세 설정 페이지</title>
+        <style id="1.fmapv9g2qd">
+            #GM_setting .btn {
+                font-size: 12px;
+            }
+            .GM_setting_autosaved.btn {
+                max-width: 100%;
+                font-size: 12px;
+                white-space: pre-wrap;
+                user-select: text;
+            }
+            #GM_setting .btn-xxs {
+                cursor: pointer;
+                padding: 4px 4px;
+            }
+            #GM_setting label.btn-xxs {
+                box-sizing: content-box;
+                width: 11px;
+                height: 11px;
+            }
+            #GM_setting a {
+                color: #428bca;
+                text-decoration: none;
+            }
+            #GM_setting a:hover,
+            #GM_setting a:focus {
+                color: #2a6496;
+                text-decoration: underline;
+            }
+            #GM_setting {
+                clear: both;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0;
+                font-size: 13px;
+                max-width: 1400px;
+                min-width: 750px;
+                box-sizing: content-box;
+            }
+            #GM_setting_head {
+                margin-left: auto;
+                margin-right: auto;
+                padding: 20px 0px 10px 10px;
+                font-size: 18px;
+                font-weight: 800;
+                max-width: 1400px;
+                min-width: 750px;
+                box-sizing: content-box;
+            }
+            #GM_setting li {
+                list-style: none;
+                margin: 0px;
+                padding: 8px;
+                border-top: 1px solid #eee;
+            }
+
+            #GM_setting .GM_setting_depth1.GM_setting_category {
+                border-top: 2px solid #999;
+                margin-top: 20px;
+                padding-top: 10px;
+            }
+            #GM_setting li[GM_setting_key="version_check"] {
+                margin-top: 0px !important;
+            }
+
+            #GM_setting .GM_setting_category_name {
+                display: table-cell;
+                width: 110px;
+                padding: 0 0 0 0px;
+                font-weight: 700;
+                vertical-align: top;
+            }
+            #GM_setting .GM_setting_category_blank {
+                display: table-cell;
+                width: 110px;
+                padding: 0 0 0 0px;
+                vertical-align: top;
+            }
+
+            #GM_setting .GM_setting_list_head {
+                display: table-cell;
+                box-sizing: content-box;
+                vertical-align: top;
+            }
+            #GM_setting .GM_setting_depth1 .GM_setting_list_head {
+                padding-left: 0px;
+                width: 300px;
+            }
+            #GM_setting .GM_setting_depth2 .GM_setting_list_head {
+                padding-left: 30px;
+                width: 270px;
+            }
+            #GM_setting .GM_setting_depth3 .GM_setting_list_head {
+                padding-left: 60px;
+                width: 240px;
+            }
+            #GM_setting .GM_setting_depth4 .GM_setting_list_head {
+                padding-left: 90px;
+                width: 210px;
+            }
+            #GM_setting .GM_setting_depth5 .GM_setting_list_head {
+                padding-left: 120px;
+                width: 180px;
+            }
+
+            #GM_setting .GM_setting_title {
+                display: block;
+                font-weight: 700;
+            }
+            #GM_setting .GM_setting_desc {
+                display: block;
+                font-size: 11px;
+            }
+
+            #GM_setting .GM_setting_input_container {
+                display: table-cell;
+                padding: 0 0 0 30px;
+                vertical-align: top;
+            }
+            #GM_setting .GM_setting_input_container span {
+                vertical-align: top;
+            }
+            #GM_setting .GM_setting_input_container span.btn {
+                margin: 0 0 0 10px;
+            }
+            #GM_setting input {
+                display: inline;
+            }
+            #GM_setting input[type="text"] {
+                width: 100px;
+                height: 30px;
+                padding: 5px 5px;
+                font-size: 12px;
+            }
+            #GM_setting textarea {
+                width: 250px;
+                height: 30px;
+                padding: 5px 5px;
+                font-size: 12px;
+            }
+            #GM_setting input[type="checkbox"] {
+                display: none;
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 0;
+            }
+            #GM_setting input[type="radio"] {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 0;
+            }
+
+            #GM_setting .radio-inline {
+                padding-left: 0;
+                padding-right: 10px;
+            }
+            #GM_setting .radio-inline input {
+                margin: 0 5px 0 0;
+            }
+
+            #GM_setting .GM_setting_item_disable,
+            #GM_setting .GM_setting_item_disable .GM_setting_title,
+            #GM_setting .GM_setting_item_disable .GM_setting_desc {
+                color: #ccc !important;
+            }
+            #GM_setting .invalid input,
+            #GM_setting .invalid textarea {
+                border-color: #dc3545;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                color: #dc3545;
+            }
+            #GM_setting .invalid input:focus,
+            #GM_setting .invalid textarea:focus {
+                border-color: #dc3545;
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+                outline: 0;
+                color: #dc3545;
+            }
+            #GM_setting .invalid {
+                color: #dc3545;
+            }
+            #GM_setting .invalid_text {
+                font-size: 12px;
+                padding: 5px 0 0 5px;
+            }
+
+            #GM_setting .GM_setting_under_dev .GM_setting_title {
+                color: #6441a5;
+                font-style: italic;
+            }
+
+            #GM_setting .btn-xxs {
+                cursor: pointer;
+                padding: 4px 4px;
+            } /*padding: 1px 2px;font-size: 9px;line-height: 1.0;border-radius: 3px;margin:0 2px 2px 0;*/
+            /* #GM_setting .btn-xxs .glyphicon {
+            }
+            #GM_setting .btn-xxs span.glyphicon {
+                font-size: 11px;
+                opacity: 0.1;
+            }
+            #GM_setting .btn-xxs.active span.glyphicon {
+                opacity: 0.9;
+            }
+            #GM_setting .btn-xxs.disable {
+                opacity: 0.3;
+                cursor: not-allowed;
+            } */
+        </style>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" media="all" />
+        <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body style="padding: 0px 30px 30px;">
+        <div id="GM_setting_container">
+            <div id="GM_setting_head">
+                <div style="height: 25px; display: inline-block; white-space: nowrap;">Settings</div>
+                <div style="display: flex; height: 25px; float: right;">
+                    <a href="https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/" target="_blank" style="font-size: 12px; font-weight: normal; align-self: flex-end;">
+                        Naver-Cafe-Twitch-Clip-Loader v0.0.3 (https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/)
+                    </a>
+                </div>
+            </div>
+            <ul id="GM_setting">
+                <li gm_setting_key="use" gm_setting_depth="1" class="GM_setting_depth1">
+                    <div class="GM_setting_category_name">General</div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">클립 링크 자동 변환</span><span class="GM_setting_desc">클립 링크 자동 변환 기능을 사용합니다.</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <label class="btn btn-default btn-xxs active">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                onfocus="this.blur()"
+                                type="checkbox"
+                                gm_setting_type="checkbox"
+                                gm_setting_key="use"
+                                gm_setting_category="general"
+                                gm_setting_radio_enable_value="none"
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                        </label>
+                    </div>
+                </li>
+                <li gm_setting_key="videoWidth" gm_setting_depth="2" class="GM_setting_depth2">
+                    <div class="GM_setting_category_blank"></div>
+                    <div class="GM_setting_list_head">
+                        <span class="GM_setting_title">비디오 가로 사이즈(%)</span>
+                        <span class="GM_setting_desc">
+                            클립 가로 사이즈를 결정합니다.<br />
+                            (Default: 100, Range: 1~100)
+                        </span>
+                    </div>
+                    <div class="GM_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="text"
+                            gm_setting_type="text"
+                            gm_setting_key="videoWidth"
+                            gm_setting_category="general"
+                            gm_setting_radio_enable_value="none"
+                        />
+                    </div>
+                </li>
+                <li gm_setting_key="method" gm_setting_depth="2" class="GM_setting_depth2">
+                    <div class="GM_setting_category_blank"></div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">클립 링크 변환 시점 선택</span><span class="GM_setting_desc">클립 링크를 비디오로 변환하는 시점을 선택</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <div gm_setting_type="radio">
+                            <label class="radio-inline">
+                                <input
+                                    name="GM_setting_method"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    onfocus="this.blur()"
+                                    value="autoLoad"
+                                    type="radio"
+                                    gm_setting_type="radio"
+                                    gm_setting_key="method"
+                                    gm_setting_category="general"
+                                    gm_setting_radio_enable_value="none"
+                                />
+                                페이지 로딩 시
+                            </label>
+                            <label class="radio-inline">
+                                <input
+                                    name="GM_setting_method"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    onfocus="this.blur()"
+                                    value="clickRequired"
+                                    type="radio"
+                                    gm_setting_type="radio"
+                                    gm_setting_key="method"
+                                    gm_setting_category="general"
+                                    gm_setting_radio_enable_value="none"
+                                />
+                                링크 클릭 시
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li gm_setting_radio_enable_value="autoLoad" gm_setting_key="autoLoadLimit" gm_setting_depth="3" class="GM_setting_depth3">
+                    <div class="GM_setting_category_name">페이지 로딩 시</div>
+                    <div class="GM_setting_list_head">
+                        <span class="GM_setting_title">페이지 로딩 시점에 변환할 개수 제한</span>
+                        <span class="GM_setting_desc">
+                            페이지 로딩 시점에 비디오로 변환할 링크의 최대 개수를 설정합니다. 최대 개수를 초과한 클립부터는 링크를 클릭하는 경우에만 비디오로 변환됩니다. 이 개수를 크게 설정하면 클립이 많은 글에서 브라우저가 한참동안 멈출 수
+                            있습니다.<br />
+                            (Default: 5, Range: 1~1000)
+                        </span>
+                    </div>
+                    <div class="GM_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="text"
+                            gm_setting_type="text"
+                            gm_setting_key="autoLoadLimit"
+                            gm_setting_category="general"
+                            gm_setting_radio_enable_value="autoLoad"
+                        />
+                    </div>
+                </li>
+                <li gm_setting_radio_enable_value="autoLoad" gm_setting_key="autoPlayFirstClip" gm_setting_depth="3" class="GM_setting_depth3">
+                    <div class="GM_setting_category_blank"></div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">첫 번째 클립을 자동 재생</span><span class="GM_setting_desc">페이지 로딩과 동시에 첫 번째 클립을 자동 재생합니다.</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <label class="btn btn-default btn-xxs">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                onfocus="this.blur()"
+                                type="checkbox"
+                                gm_setting_type="checkbox"
+                                gm_setting_key="autoPlayFirstClip"
+                                gm_setting_category="general"
+                                gm_setting_radio_enable_value="autoLoad"
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                        </label>
+                    </div>
+                </li>
+                <li gm_setting_radio_enable_value="autoLoad" gm_setting_key="autoPlayFirstClipMuted" gm_setting_depth="3" class="GM_setting_depth3">
+                    <div class="GM_setting_category_blank"></div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">클립 자동 재생 시 클립 음소거</span><span class="GM_setting_desc">클립 자동 재생 시 음소거 상태로 시작합니다.</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <label class="btn btn-default btn-xxs active">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                onfocus="this.blur()"
+                                type="checkbox"
+                                gm_setting_type="checkbox"
+                                gm_setting_key="autoPlayFirstClipMuted"
+                                gm_setting_category="general"
+                                gm_setting_radio_enable_value="autoLoad"
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                        </label>
+                    </div>
+                </li>
+                <li gm_setting_radio_enable_value="clickRequired" gm_setting_key="clickRequiredAutoPlay" gm_setting_depth="3" class="GM_setting_depth3 GM_setting_item_disable">
+                    <div class="GM_setting_category_name">링크 클릭 시</div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">클립 로드 시 클립 자동 재생</span><span class="GM_setting_desc">클릭과 동시에 클립을 자동 재생합니다.</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <label class="btn btn-default btn-xxs active disable">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                onfocus="this.blur()"
+                                type="checkbox"
+                                gm_setting_type="checkbox"
+                                gm_setting_key="clickRequiredAutoPlay"
+                                gm_setting_category="general"
+                                gm_setting_radio_enable_value="clickRequired"
+                                disabled=""
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                        </label>
+                    </div>
+                </li>
+                <li gm_setting_radio_enable_value="clickRequired" gm_setting_key="clickRequiredMuted" gm_setting_depth="3" class="GM_setting_depth3 GM_setting_item_disable">
+                    <div class="GM_setting_category_blank"></div>
+                    <div class="GM_setting_list_head"><span class="GM_setting_title">클립 로드 시 클립 음소거</span><span class="GM_setting_desc">클립 재생 시 음소거 상태로 시작합니다.</span></div>
+                    <div class="GM_setting_input_container form-group">
+                        <label class="btn btn-default btn-xxs disable">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                onfocus="this.blur()"
+                                type="checkbox"
+                                gm_setting_type="checkbox"
+                                gm_setting_key="clickRequiredMuted"
+                                gm_setting_category="general"
+                                gm_setting_radio_enable_value="clickRequired"
+                                disabled=""
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                        </label>
+                    </div>
+                </li>
+                <li class="GM_setting_category GM_setting_depth1">
+                    <div class="GM_setting_category_name">Reset</div>
+                    <div class="GM_setting_list_head">
+                        <span class="GM_setting_title">
+                            <span class="GM_setting_reset btn btn-primary" style="margin-left: 0;">Reset Settings</span>
+                            <!--<span class="GM_setting_reset_all btn btn-primary">전체 초기화(새로고침 필요)</span>-->
+                        </span>
+                        <span class="GM_setting_desc"></span>
+                    </div>
+                    <div class="GM_setting_input_container form-group"></div>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
