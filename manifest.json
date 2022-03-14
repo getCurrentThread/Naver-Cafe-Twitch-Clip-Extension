@@ -2,9 +2,9 @@
     "manifest_version": 3,
     "name": "네이버 카페 트위치 클립 로더Naver Cafe Twitch Clip Loader",
     "description": "네이버 카페에 게시된 트위치 클립을 임베디드 형태로 불러올 수 있습니다.",
-    "homepage_url": "https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader",
+    "homepage_url": "https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension",
     "version": "0.0.3",
-    "author": "nomomo",
+    "author": "getCurrentThread",
     "action": {
       "default_icon": "images/thumbnail.png",
       "default_popup": "popup.html"
