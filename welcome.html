@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <title>Naver-Cafe-Twitch-Clip-Loader 상세 설정 페이지</title>
+        <style id="1.fmapv9g2qd">
+            #NCTCL_setting .btn {
+                font-size: 12px;
+            }
+            .NCTCL_setting_autosaved.btn {
+                max-width: 100%;
+                font-size: 12px;
+                white-space: pre-wrap;
+                user-select: text;
+            }
+            #NCTCL_setting .btn-xxs {
+                cursor: pointer;
+                padding: 4px 4px;
+            }
+            #NCTCL_setting label.btn-xxs {
+                box-sizing: content-box;
+                width: 11px;
+                height: 11px;
+            }
+            #NCTCL_setting a {
+                color: #428bca;
+                text-decoration: none;
+            }
+            #NCTCL_setting a:hover,
+            #NCTCL_setting a:focus {
+                color: #2a6496;
+                text-decoration: underline;
+            }
+            #NCTCL_setting {
+                clear: both;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0;
+                font-size: 13px;
+                max-width: 1400px;
+                min-width: 750px;
+                box-sizing: content-box;
+            }
+            #NCTCL_setting_head {
+                margin-left: auto;
+                margin-right: auto;
+                padding: 20px 0px 10px 10px;
+                font-size: 18px;
+                font-weight: 800;
+                max-width: 1400px;
+                min-width: 750px;
+                box-sizing: content-box;
+            }
+            #NCTCL_setting li {
+                list-style: none;
+                margin: 0px;
+                padding: 8px;
+                border-top: 1px solid #eee;
+            }
+
+            #NCTCL_setting .NCTCL_setting_depth1.NCTCL_setting_category {
+                border-top: 2px solid #999;
+                margin-top: 20px;
+                padding-top: 10px;
+            }
+            #NCTCL_setting li[NCTCL_setting_key="version_check"] {
+                margin-top: 0px !important;
+            }
+
+            #NCTCL_setting .NCTCL_setting_category_name {
+                display: table-cell;
+                width: 110px;
+                padding: 0 0 0 0px;
+                font-weight: 700;
+                vertical-align: top;
+            }
+            #NCTCL_setting .NCTCL_setting_category_blank {
+                display: table-cell;
+                width: 110px;
+                padding: 0 0 0 0px;
+                vertical-align: top;
+            }
+
+            #NCTCL_setting .NCTCL_setting_list_head {
+                display: table-cell;
+                box-sizing: content-box;
+                vertical-align: top;
+            }
+            #NCTCL_setting .NCTCL_setting_depth1 .NCTCL_setting_list_head {
+                padding-left: 0px;
+                width: 300px;
+            }
+            #NCTCL_setting .NCTCL_setting_depth2 .NCTCL_setting_list_head {
+                padding-left: 30px;
+                width: 270px;
+            }
+            #NCTCL_setting .NCTCL_setting_depth3 .NCTCL_setting_list_head {
+                padding-left: 60px;
+                width: 240px;
+            }
+            #NCTCL_setting .NCTCL_setting_depth4 .NCTCL_setting_list_head {
+                padding-left: 90px;
+                width: 210px;
+            }
+            #NCTCL_setting .NCTCL_setting_depth5 .NCTCL_setting_list_head {
+                padding-left: 120px;
+                width: 180px;
+            }
+
+            #NCTCL_setting .NCTCL_setting_title {
+                display: block;
+                font-weight: 700;
+            }
+            #NCTCL_setting .NCTCL_setting_desc {
+                display: block;
+                font-size: 11px;
+            }
+
+            #NCTCL_setting .NCTCL_setting_input_container {
+                display: table-cell;
+                padding: 0 0 0 30px;
+                vertical-align: top;
+            }
+            #NCTCL_setting .NCTCL_setting_input_container span {
+                vertical-align: top;
+            }
+            #NCTCL_setting .NCTCL_setting_input_container span.btn {
+                margin: 0 0 0 10px;
+            }
+            #NCTCL_setting input {
+                display: inline;
+            }
+            #NCTCL_setting input[type="text"] {
+                width: 100px;
+                height: 30px;
+                padding: 5px 5px;
+                font-size: 12px;
+            }
+            #NCTCL_setting textarea {
+                width: 250px;
+                height: 30px;
+                padding: 5px 5px;
+                font-size: 12px;
+            }
+            #NCTCL_setting input[type="checkbox"] {
+                /* display: none; */
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 0;
+            }
+            #NCTCL_setting input[type="radio"] {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                margin: 0;
+            }
+
+            #NCTCL_setting .radio-inline {
+                padding-left: 0;
+                padding-right: 10px;
+            }
+            #NCTCL_setting .radio-inline input {
+                margin: 0 5px 0 0;
+            }
+
+            #NCTCL_setting .NCTCL_setting_item_disable,
+            #NCTCL_setting .NCTCL_setting_item_disable .NCTCL_setting_title,
+            #NCTCL_setting .NCTCL_setting_item_disable .NCTCL_setting_desc {
+                color: #ccc !important;
+            }
+            #NCTCL_setting .invalid input,
+            #NCTCL_setting .invalid textarea {
+                border-color: #dc3545;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                color: #dc3545;
+            }
+            #NCTCL_setting .invalid input:focus,
+            #NCTCL_setting .invalid textarea:focus {
+                border-color: #dc3545;
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+                outline: 0;
+                color: #dc3545;
+            }
+            #NCTCL_setting .invalid {
+                color: #dc3545;
+            }
+            #NCTCL_setting .invalid_text {
+                font-size: 12px;
+                padding: 5px 0 0 5px;
+            }
+
+            #NCTCL_setting .NCTCL_setting_under_dev .NCTCL_setting_title {
+                color: #6441a5;
+                font-style: italic;
+            }
+
+            #NCTCL_setting .btn-xxs {
+                cursor: pointer;
+                padding: 4px 4px;
+            } /*padding: 1px 2px;font-size: 9px;line-height: 1.0;border-radius: 3px;margin:0 2px 2px 0;*/
+            /* #NCTCL_setting .btn-xxs .glyphicon {
+            }
+            #NCTCL_setting .btn-xxs span.glyphicon {
+                font-size: 11px;
+                opacity: 0.1;
+            }
+            #NCTCL_setting .btn-xxs.active span.glyphicon {
+                opacity: 0.9;
+            }
+            #NCTCL_setting .btn-xxs.disable {
+                opacity: 0.3;
+                cursor: not-allowed;
+            } */
+        </style>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" media="all" />
+        <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="welcome.js"></script>
+    </head>
+
+    <body style="padding: 0px 30px 30px;">
+        <div id="NCTCL_setting_container">
+            <div id="NCTCL_setting_head">
+                <div style="height: 25px; display: inline-block; white-space: nowrap;">Settings</div>
+                <div style="display: flex; height: 25px; float: right;">
+                    <a href="https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/" target="_blank" style="font-size: 12px; font-weight: normal; align-self: flex-end;">
+                        Naver-Cafe-Twitch-Clip-Loader v0.0.3 (https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/)
+                    </a>
+                </div>
+            </div>
+            <ul id="NCTCL_setting">
+                <li NCTCL_setting_key="use" NCTCL_setting_depth="1" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_name">General</div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 링크 자동 변환</span><span class="NCTCL_setting_desc">클립 링크 자동 변환 기능을 사용합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="checkbox"
+                            name="use"
+                        />
+                    </div>
+                </li>
+                <li NCTCL_setting_key="videoWidth" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">비디오 가로 사이즈(%)</span>
+                        <span class="NCTCL_setting_desc">
+                            클립 가로 사이즈를 결정합니다.<br />
+                            (Default: 100, Range: 1~100)
+                        </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="number"
+                            name="videoWidth"
+                            min="1" max="100"
+                        />
+                    </div>
+                </li>
+                <li NCTCL_setting_key="method" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 링크 변환 시점 선택</span><span class="NCTCL_setting_desc">클립 링크를 비디오로 변환하는 시점을 선택</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <div>
+                            <label class="radio-inline">
+                                <input
+                                    class="form-control"
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    value="autoLoad"
+                                    type="radio"
+                                    name="method"
+                                />
+                                페이지 로딩 시
+                            </label>
+                            <label class="radio-inline">
+                                <input
+                                    class="form-control"
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    value="clickRequired"
+                                    type="radio"
+                                    name="method"
+                                />
+                                링크 클릭 시
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoLoadLimit" NCTCL_setting_depth="3" class="NCTCL_setting_depth3">
+                    <div class="NCTCL_setting_category_name">페이지 로딩 시</div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">페이지 로딩 시점에 변환할 개수 제한</span>
+                        <span class="NCTCL_setting_desc">
+                            페이지 로딩 시점에 비디오로 변환할 링크의 최대 개수를 설정합니다. 최대 개수를 초과한 클립부터는 링크를 클릭하는 경우에만 비디오로 변환됩니다. 이 개수를 크게 설정하면 클립이 많은 글에서 브라우저가 한참동안 멈출 수
+                            있습니다.<br />
+                            (Default: 5, Range: 1~1000)
+                        </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="number"
+                            name="autoLoadLimit"
+                            min="1" max="1000"
+                            toggle="method:autoLoad"
+                        />
+                    </div>
+                </li>
+                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClip" NCTCL_setting_depth="3" class="NCTCL_setting_depth3">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">첫 번째 클립을 자동 재생</span><span class="NCTCL_setting_desc">페이지 로딩과 동시에 첫 번째 클립을 자동 재생합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                            <input
+                                class="form-control"
+                                autocomplete="off"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                type="checkbox"
+                                name="autoPlayFirstClip"
+                                toggle="method:autoLoad"
+                            />
+                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
+                       
+                    </div>
+                </li>
+                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClipMuted" NCTCL_setting_depth="3" class="NCTCL_setting_depth3">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 자동 재생 시 클립 음소거</span><span class="NCTCL_setting_desc">클립 자동 재생 시 음소거 상태로 시작합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="checkbox"
+                            name="autoPlayFirstClipMuted"
+                            toggle="method:autoLoad"
+                        />
+                    </div>
+                </li>
+                <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredAutoPlay" NCTCL_setting_depth="3" class="NCTCL_setting_depth3 ">
+                    <div class="NCTCL_setting_category_name">링크 클릭 시</div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 로드 시 클립 자동 재생</span><span class="NCTCL_setting_desc">클릭과 동시에 클립을 자동 재생합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="checkbox"
+                            name="clickRequiredAutoPlay"
+                            toggle="method:clickRequired"
+                        />
+                    </div>
+                </li>
+                <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredMuted" NCTCL_setting_depth="3" class="NCTCL_setting_depth3 ">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 로드 시 클립 음소거</span><span class="NCTCL_setting_desc">클립 재생 시 음소거 상태로 시작합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="checkbox"
+                            name="clickRequiredMuted"
+                            toggle="method:clickRequired"
+                        />
+                    </div>
+                </li>
+                <li class="NCTCL_setting_category NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_name">Reset</div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">
+                            <button id="reset" class="NCTCL_setting_reset btn btn-primary" style="margin-left: 0;">Reset Settings</button>
+                            <!--<span class="NCTCL_setting_reset_all btn btn-primary">전체 초기화(새로고침 필요)</span>-->
+                        </span>
+                        <span class="NCTCL_setting_desc"></span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group"></div>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
