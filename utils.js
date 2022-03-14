@@ -54,15 +54,21 @@ const NCTCL_INIT_SETTINGS = {
   videoWidth: 100,
   method: "autoLoad",
   autoLoadLimit: 5,
-  autoPlayFirstClip: false, //주석처리함
+  autoPlayFirstClip: false,
   autoPlayFirstClipMuted: true,
   clickRequiredAutoPlay: true,
   clickRequiredMuted: false,
 }
 
 class NCTCLM{
+  static async reset() {
+    NCTCLM.settings = NCTCL_INIT_SETTINGS;
+    await NCTCLM.saveSettings();
+    return NCTCLM.settings;
+  }
+
   static async loadSettings() {
-    NCTCLM.settings = await getObjectFromLocalStorage('LCTCLM_settings');
+    NCTCLM.settings = await getObjectFromLocalStorage('NCTCL_settings');
     if (!NCTCLM.settings) {
       NCTCLM.settings = NCTCL_INIT_SETTINGS;
       await NCTCLM.saveSettings();
@@ -72,7 +78,7 @@ class NCTCLM{
   
   static async saveSettings() {
     await saveObjectInLocalStorage({
-      LCTCLM_settings: NCTCLM.settings
+      NCTCL_settings: NCTCLM.settings
     });
   }
 
