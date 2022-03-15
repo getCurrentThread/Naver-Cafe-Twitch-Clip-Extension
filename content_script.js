@@ -1,3 +1,5 @@
+
+
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
     ////////////////////////////////////////////////////////////////////////////////////
@@ -15,9 +17,9 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     }
     reCalculateIframeWidth(contentWidth);
 
-    // 내부 iframe의 document를 가져오기
-    const mainContent = document.querySelector("iframe#cafe_main")?.contentDocument || document;
-    DEBUG("mainContent", mainContent);
+
+
+
 
     // Twitch clip 링크를 iframe 으로 변환
     var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted){
@@ -51,71 +53,80 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             console.error("Error from changeToTwitchCilpIframe", e);
         }
     }
+    var loop = function(){
+        // 내부 iframe의 document를 가져오기
+        const mainContent = document.querySelector("iframe#cafe_main")?.contentDocument;
+        DEBUG("mainContent", mainContent);
+        if(!mainContent) return;
+        // Twitch clip 링크 찾기
+        $(mainContent).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
+            try{
+                var $elem = $(elem);
+                if($elem.hasClass("fired")) return;
+                $elem.addClass("fired");
 
+                var $as = $elem.find("a");
+                var regex = /^https?:\/\/clips\.twitch\.tv\/([a-zA-Z0-9-_]+)/;
+                var regex2 = /^https?:\/\/www.twitch.tv\/[a-zA-Z0-9-_]+\/clip\/([a-zA-Z0-9-_]+)/;
+                
+                // 자동 변환 시
+                if(NCTCL_SETTINGS.method === "autoLoad"){
+                    var $a = $as.first();
+                    var href = $a.attr("href");
+                    var match = href.match(regex) || href.match(regex2);
 
-    // Twitch clip 링크 찾기
-    $(mainContent).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
-        try{
-            if(!NCTCL_SETTINGS.use) return;
-            var $elem = $(elem);
-            if($elem.hasClass("fired")) return;
-            $elem.addClass("fired");
+                    if(!!match && match.length > 1){
+                        var clipId = match[1];
+                        DEBUG("clipId", clipId);
+                        var isAutoPlay = false;
+                        var isMuted = false;
+                        var NCTCL_Length = mainContent.querySelectorAll(".NCTCL-iframe").length;
+                            if(NCTCL_Length == 0){
+                                if(NCTCL_SETTINGS.autoPlayFirstClip) isAutoPlay = true;
+                                if(NCTCL_SETTINGS.autoPlayFirstClip && NCTCL_SETTINGS.autoPlayFirstClipMuted) isMuted = true;
+                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
+                            }
+                            else if(NCTCL_Length < NCTCL_SETTINGS.autoLoadLimit){
+                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
+                            }
+                            else{
+                                if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
+                                $a.on("click", function(e){
+                                    e.preventDefault();
+                                    changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted);
+                                });
+                            }
+                        
+                    }
+                }
+                // 클릭 변환 시
+                else{ 
+                    $as.each(function(i, v){
+                        var $a = $(v);
+                        var href = $a.attr("href");
+                        var match = href.match(regex) || href.match(regex2);
 
-            var $as = $elem.find("a");
-            var regex = /^https?:\/\/clips\.twitch\.tv\/([a-zA-Z0-9-_]+)/;
-            var regex2 = /^https?:\/\/www.twitch.tv\/[a-zA-Z0-9-_]+\/clip\/([a-zA-Z0-9-_]+)/;
-            
-            // 자동 변환 시
-            if(NCTCL_SETTINGS.method === "autoLoad"){
-                var $a = $as.first();
-                var href = $a.attr("href");
-                var match = href.match(regex) || href.match(regex2);
-
-                if(!!match && match.length > 1){
-                    var clipId = match[1];
-                    DEBUG("clipId", clipId);
-                    var isAutoPlay = false;
-                    var isMuted = false;
-                    var NCTCL_Length = mainContent.querySelectorAll(".NCTCL-iframe").length;
-                        if(NCTCL_Length == 0){
-                            if(NCTCL_SETTINGS.autoPlayFirstClip) isAutoPlay = true;
-                            if(NCTCL_SETTINGS.autoPlayFirstClipMuted) isMuted = true;
-                            changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
-                        }
-                        else if(NCTCL_Length < NCTCL_SETTINGS.autoLoadLimit){
-                            changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
-                        }
-                        else{
+                        if(match !== null && match.length > 1){
+                            var clipId = match[1];
                             if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
                             $a.on("click", function(e){
                                 e.preventDefault();
                                 changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted);
                             });
                         }
-                    
+                    });
                 }
             }
-            // 클릭 변환 시
-            else{ 
-                $as.each(function(i, v){
-                    var $a = $(v);
-                    var href = $a.attr("href");
-                    var match = href.match(regex);
-
-                    if(match !== null && match.length > 1){
-                        var clipId = match[1];
-                        if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
-                        $a.on("click", function(e){
-                            e.preventDefault();
-                            changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted);
-                        });
-                    }
-                });
+            catch(e){
+                console.error("Error from arrive", e);
             }
-        }
-        catch(e){
-            console.error("Error from arrive", e);
-        }
-    });
+        });
+    }
+    if(NCTCL_SETTINGS.use){
+        loop();
+        // interval timer every 5 seconds
+        var intervalTimer = setInterval(loop, 5000);
+    }
+
     return;
 });
