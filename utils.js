@@ -4,11 +4,11 @@ function escapeHtml(string) { return String(string).replace(/[&<>"'`=/]/g, funct
 
 
 // debug message
-function NOMO_DEBUG( /**/ ) {
-  if (!! NCTCLM?.settings?.debug) {
+function DEBUG( /**/ ) {
+  if (NCTCLM?.settings?.debug) {
       var args = arguments, args_length = args.length, args_copy = args;
       for (var i = args_length; i > 0; i--) args[i] = args_copy[i - 1];
-      args[0] = "[NCTCL]  ";
+      args[0] = "[NCTC]  ";
       args.length = args_length + 1;
       console.log.apply(console, args);
   }
@@ -80,6 +80,7 @@ class NCTCLM{
     await saveObjectInLocalStorage({
       NCTCL_settings: NCTCLM.settings
     });
+    DEBUG("[NCTCL] saveSettings", NCTCLM.settings);
   }
 
   static async setValue(key, value) {

@@ -1,4 +1,5 @@
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
+    DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
     ////////////////////////////////////////////////////////////////////////////////////
     // Main
     ////////////////////////////////////////////////////////////////////////////////////
@@ -10,13 +11,13 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         videoHeight = Number(videoWidth)/16*9;// + 30
         videoWidthStr = String(videoWidth) + "px";
         videoHeightStr = String(videoHeight) + "px";
-        NOMO_DEBUG("reCalculateIframeWidth", width);
+        DEBUG("reCalculateIframeWidth", width);
     }
     reCalculateIframeWidth(contentWidth);
 
-
     // 내부 iframe의 document를 가져오기
     const mainContent = document.querySelector("iframe#cafe_main")?.contentDocument || document;
+    DEBUG("mainContent", mainContent);
 
     // Twitch clip 링크를 iframe 으로 변환
     var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted){
@@ -53,7 +54,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
 
 
     // Twitch clip 링크 찾기
-    $(mainContent || document).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
+    $(mainContent).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
         try{
             if(!NCTCL_SETTINGS.use) return;
             var $elem = $(elem);
@@ -72,6 +73,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
 
                 if(!!match && match.length > 1){
                     var clipId = match[1];
+                    DEBUG("clipId", clipId);
                     var isAutoPlay = false;
                     var isMuted = false;
                     var NCTCL_Length = mainContent.querySelectorAll(".NCTCL-iframe").length;
