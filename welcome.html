@@ -2,8 +2,8 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8">
-        <title>Naver-Cafe-Twitch-Clip-Loader 상세 설정 페이지</title>
-        <style id="1.fmapv9g2qd">
+        <title>Naver-Cafe-Twitch-Clip-Extension 상세 설정 페이지</title>
+        <style>
             #NCTCL_setting .btn {
                 font-size: 12px;
             }
@@ -224,9 +224,14 @@
             <div id="NCTCL_setting_head">
                 <div style="height: 25px; display: inline-block; white-space: nowrap;">Settings</div>
                 <div style="display: flex; height: 25px; float: right;">
-                    <a href="https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/" target="_blank" style="font-size: 12px; font-weight: normal; align-self: flex-end;">
-                        Naver-Cafe-Twitch-Clip-Loader v0.0.3 (https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader/)
+                    <a href="https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension/" target="_blank" style="font-size: 12px; font-weight: normal; align-self: flex-end; overflow: hidden;">
+                        Naver-Cafe-Twitch-Clip-Extension v0.0.3 (https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension/)
                     </a>
+                </div>
+                <div>
+                    <label style="font-size: 0.7em; font-weight: 800; color: #428bca;">
+                        모든 설정은 자동 저장 됩니다
+                    </label>
                 </div>
             </div>
             <ul id="NCTCL_setting">
@@ -395,7 +400,8 @@
                     <div class="NCTCL_setting_category_name">Reset</div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">
-                            <button id="reset" class="NCTCL_setting_reset btn btn-primary" style="margin-left: 0;">Reset Settings</button>
+                            <button id="reset" class="NCTCL_setting_reset btn btn-warning font-style: black;">Reset All</button>
+                            <!-- <button id="save" class="NCTCL_setting_reset btn btn-success" style="margin-left: 0;">save</button> -->
                             <!--<span class="NCTCL_setting_reset_all btn btn-primary">전체 초기화(새로고침 필요)</span>-->
                         </span>
                         <span class="NCTCL_setting_desc"></span>
