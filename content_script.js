@@ -63,14 +63,13 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                 $elem.addClass("fired");
 
                 var $as = $elem.find("a");
-                var regex = /^https?:\/\/clips\.twitch\.tv\/([a-zA-Z0-9-_]+)/;
-                var regex2 = /^https?:\/\/www.twitch.tv\/[a-zA-Z0-9-_]+\/clip\/([a-zA-Z0-9-_]+)/;
+                var regex = /^(?:https?:\/\/)(?:clips\.twitch\.tv|(?:www\.)?twitch\.tv\/[a-zA-Z0-9-_]+\/clip)\/([a-zA-Z0-9-_]+)/;
                 
                 // 자동 변환 시
                 if(NCTCL_SETTINGS.method === "autoLoad"){
                     var $a = $as.first();
                     var href = $a.attr("href");
-                    var match = href.match(regex) || href.match(regex2);
+                    var match = href.match(regex);
 
                     if(!!match && match.length > 1){
                         var clipId = match[1];
@@ -101,7 +100,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     $as.each(function(i, v){
                         var $a = $(v);
                         var href = $a.attr("href");
-                        var match = href.match(regex) || href.match(regex2);
+                        var match = href.match(regex);
 
                         if(match !== null && match.length > 1){
                             var clipId = match[1];
