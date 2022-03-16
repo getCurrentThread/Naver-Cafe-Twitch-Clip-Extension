@@ -18,9 +18,6 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     reCalculateIframeWidth(contentWidth);
 
 
-
-
-
     // Twitch clip 링크를 iframe 으로 변환
     var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted){
         try{
@@ -59,21 +56,20 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         DEBUG("mainContent", mainContent);
         if(!mainContent) return;
         // Twitch clip 링크 찾기
-        $(mainContent).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
+        $(mainContent).find("div.se-module-oglink").each(function(index, elem){
             try{
                 var $elem = $(elem);
                 if($elem.hasClass("fired")) return;
                 $elem.addClass("fired");
 
                 var $as = $elem.find("a");
-                var regex = /^https?:\/\/clips\.twitch\.tv\/([a-zA-Z0-9-_]+)/;
-                var regex2 = /^https?:\/\/www.twitch.tv\/[a-zA-Z0-9-_]+\/clip\/([a-zA-Z0-9-_]+)/;
+                var regex = /^(?:https?:\/\/)(?:clips\.twitch\.tv|(?:www\.)?twitch\.tv\/[a-zA-Z0-9-_]+\/clip)\/([a-zA-Z0-9-_]+)/;
                 
                 // 자동 변환 시
                 if(NCTCL_SETTINGS.method === "autoLoad"){
                     var $a = $as.first();
                     var href = $a.attr("href");
-                    var match = href.match(regex) || href.match(regex2);
+                    var match = href.match(regex);
 
                     if(!!match && match.length > 1){
                         var clipId = match[1];
@@ -104,7 +100,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     $as.each(function(i, v){
                         var $a = $(v);
                         var href = $a.attr("href");
-                        var match = href.match(regex) || href.match(regex2);
+                        var match = href.match(regex);
 
                         if(match !== null && match.length > 1){
                             var clipId = match[1];
@@ -124,8 +120,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     }
     if(NCTCL_SETTINGS.use){
         loop();
-        // interval timer every 5 seconds
-        var intervalTimer = setInterval(loop, 5000);
+        setInterval(loop, NCTCL_SETTINGS.timerDelay);
     }
 
     return;
