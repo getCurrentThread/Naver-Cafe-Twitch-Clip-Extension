@@ -52,6 +52,7 @@ const NCTCL_INIT_SETTINGS = {
   debug: false,
   use: true,
   videoWidth: 100,
+  timerDelay: 4000,
   method: "autoLoad",
   autoLoadLimit: 5,
   autoPlayFirstClip: false,
@@ -69,10 +70,7 @@ class NCTCLM{
 
   static async loadSettings() {
     NCTCLM.settings = await getObjectFromLocalStorage('NCTCL_settings');
-    if (!NCTCLM.settings) {
-      NCTCLM.settings = NCTCL_INIT_SETTINGS;
-      await NCTCLM.saveSettings();
-    }
+    NCTCLM.settings = {...NCTCL_INIT_SETTINGS, ...NCTCLM.settings};
     return NCTCLM.settings;
   }
   

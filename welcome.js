@@ -24,10 +24,12 @@ $(document).ready(function(){
                 const $this = $(this);
                 if($this.is(':checkbox'))
                     settings[key] = this.checked
+                else if($this.is('[type=number]'))
+                    settings[key] = parseInt($this.val());
                 else
                     settings[key] = $this.val();
                 //save settings
-                NCTCLM.setValue(key, settings[key]);    
+                NCTCLM.setValue(key, settings[key]);
             });
 
             // if attribute 'toggle' name input is toggle self enable/disable input

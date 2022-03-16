@@ -18,9 +18,6 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     reCalculateIframeWidth(contentWidth);
 
 
-
-
-
     // Twitch clip 링크를 iframe 으로 변환
     var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted){
         try{
@@ -59,7 +56,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         DEBUG("mainContent", mainContent);
         if(!mainContent) return;
         // Twitch clip 링크 찾기
-        $(mainContent).arrive("div.se-module-oglink", { onlyOnce: true, existing: true }, function (elem) {
+        $(mainContent).find("div.se-module-oglink").each(function(index, elem){
             try{
                 var $elem = $(elem);
                 if($elem.hasClass("fired")) return;
@@ -124,8 +121,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     }
     if(NCTCL_SETTINGS.use){
         loop();
-        // interval timer every 5 seconds
-        var intervalTimer = setInterval(loop, 5000);
+        setInterval(loop, NCTCL_SETTINGS.timerDelay);
     }
 
     return;
