@@ -1,4 +1,8 @@
 # Naver-Cafe-Twitch-Clip-Extension
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+[![chrome](https://img.shields.io/chrome-web-store/v/anfmlkmmakldmlaboibhmmfnjgmpbffc.svg)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+[![users](https://img.shields.io/chrome-web-store/d/anfmlkmmakldmlaboibhmmfnjgmpbffc.svg)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+![Contributors](https://img.shields.io/github/contributors/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension.svg)
 > 해당 레포는 다음의 forked 입니다 : [nomomo/Naver-Cafe-Twitch-Clip-Loader](https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader)
 
 - 본 익스텐션은 네이버 카페 글(PC 버전)에서 Twitch 클립 링크를 감지하는 경우, <br/>카페 글 내에서 바로 재생 가능한 비디오로 변환해줍니다. (편하다!)
@@ -15,7 +19,10 @@
 ![Settings](/images/NCTCL_preview_03.png)
 
 ## Install
-- [익스텐션 설치링크](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+
+[![Install](/images/NCTCL_install.png)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+
+
 
 > 주의: 본 익스텐션 설치 및 사용하며 브라우저 과부하로 인한 응답 없음 등 으로 인한 데이터 손실 등 문제 발생 시 개발자는 책임지지 않습니다.  
 > Naver Cafe 접속에 문제가 생기거나 클립 재생이 안 되는 문제 등이 발생하는 경우, 익스텐션 메뉴에서 이 익스텐션을 끄거나 삭제해주세요.
@@ -23,7 +30,7 @@
 ## Bug report
 
 - 버그 리포트 & 건의사항은 아래의 링크로 보내주세요.
-- getCurrentThread@gmail.com
+- wak8835@gmail.com
 
 ## Change log
 
