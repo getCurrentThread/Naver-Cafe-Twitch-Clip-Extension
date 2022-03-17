@@ -55,6 +55,12 @@ $(document).ready(function(){
         return;
     })();
 
+    // number input type limit to min~max
+    $('input[type="number"]').on('input change keyup paste', function () {
+        if (this.min) this.value = Math.max(parseInt(this.min), parseInt(this.value) || 0);
+        if (this.max) this.value = Math.min(parseInt(this.max), parseInt(this.value) || 0);
+      });
+
     // if click on reset button, reset settings
     $('#reset').click(function(){
         const settings = NCTCLM.reset();
