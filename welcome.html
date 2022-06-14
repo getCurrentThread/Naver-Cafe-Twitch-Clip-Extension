@@ -212,6 +212,29 @@
                 opacity: 0.3;
                 cursor: not-allowed;
             } */
+            #NCTCL_setting_footer {
+                padding: 30px 0 30px 0;
+                margin: 30px 0 0 0;
+                border-top: 1px solid #ccc;
+                text-align: center;
+                font-size: 13px;
+                letter-spacing: 0.2px;
+            }
+            #NCTCL_setting_footer .footer_divider {
+                margin: 0 5px;
+                display: inline-block;
+                width: 1px;
+                height: 13px;
+                background-color: #ebebeb;
+            }
+            body::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+                background: #eee;
+            }
+            body::-webkit-scrollbar-thumb {
+                background: #ccc;
+            }
         </style>
         <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" media="all" />
         <script type="text/javascript" src="lib/jquery-3.6.0.min.js"></script>
@@ -225,7 +248,7 @@
                 <div style="height: 25px; display: inline-block; white-space: nowrap;">Settings</div>
                 <div style="display: flex; height: 25px; float: right;">
                     <a href="https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension/" target="_blank" style="font-size: 12px; font-weight: normal; align-self: flex-end; overflow: hidden;">
-                        Naver-Cafe-Twitch-Clip-Extension v0.0.3 (https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension/)
+                        Naver-Cafe-Twitch-Clip-Extension v0.1.0 (https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension/)
                     </a>
                 </div>
                 <div>
@@ -272,7 +295,7 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_key="timerDelay" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
+                <!-- <li NCTCL_setting_key="timerDelay" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">스케쥴러 동작 (ms)</span>
@@ -294,7 +317,7 @@
                             step="100"
                         />
                     </div>
-                </li>
+                </li> -->
                 <li NCTCL_setting_key="method" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 링크 변환 시점 선택</span><span class="NCTCL_setting_desc">클립 링크를 비디오로 변환하는 시점을 선택</span></div>
@@ -431,6 +454,48 @@
                     </div>
                     <div class="NCTCL_setting_input_container form-group"></div>
                 </li>
+                <li class="NCTCL_setting_category NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_name">
+                       후원하기
+                       <div class="NCTCL_setting_depth2">(원저작자)</div>
+                    </div>
+                    <div class="NCTCL_setting_list_head">
+                       <span class="NCTCL_setting_title">
+                       Buy me a coffee 로 커피 한 잔 사주기
+                       </span>
+                       <span class="NCTCL_setting_desc">
+                       커피 한 잔☕ 으로 프로젝트를 지원해주세요~
+                       </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                       <a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img
+                          src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee"
+                          height="41" width="174" /></a>
+                    </div>
+                 </li>
+                 <li class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                       <span class="NCTCL_setting_title"> Toonation 으로 후원하기 </span>
+                       <span class="NCTCL_setting_desc"></span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                       <a href="https://toon.at/donate/636947867320352181" target="_blank"><img
+                          src="https://raw.githubusercontent.com/nomomo/Addostream/master/assets/toonation_b11.gif"
+                          height="41" alt="Donate with Toonation" /></a>
+                    </div>
+                 </li>
+              </ul>
+              <div id="NCTCL_setting_footer">
+                 <a href="https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader"
+                    target="_blank">NCTC-Loader</a> v0.5.1
+                 <div class="footer_divider"></div>
+                 <a href="https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension"
+                    target="_blank">NCTC-Extension</a> v0.1.0.0
+                 <div class="footer_divider"></div>
+                 ©2017-2022 <a href="https://nomo.asia/" target="_blank">NOMO</a>,
+                 <a href="https://github.com/getCurrentThread" target="_blank">getCurrentThread</a>
+              </div>
             </ul>
         </div>
     </body>

@@ -19,7 +19,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
 
 
     // Twitch clip 링크를 iframe 으로 변환
-    var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted){
+    var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted, lazy) {
         try{
             var $parentContainer = $elem.closest("div.se-component-content");
             var $article_container = $elem.closest("div.article_container");
@@ -37,7 +37,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
             $parentContainer.after(`
             <div class="NCTCL-iframe-container">
-                <iframe class="NCTCL-iframe" src="https://clips.twitch.tv/embed?clip=${clipId}&parent=${parentHref}&autoplay=${autoPlay}&muted=${muted}" frameborder="0" allowfullscreen="true" scrolling="no" height="${videoHeightStr}" width="${videoWidthStr}"></iframe>
+                <iframe ${lazy ? "loading='lazy'" : ""} class="NCTCL-iframe" src="https://clips.twitch.tv/embed?clip=${clipId}&parent=${parentHref}&autoplay=${autoPlay}&muted=${muted}" frameborder="0" allowfullscreen="true" scrolling="no" height="${videoHeightStr}" width="${videoWidthStr}"></iframe>
                 <br />
                 <a href="${clipurl}" class="se-link" target="_blank" style="width:${videoWidthStr};">
                     ${titleText}
@@ -56,7 +56,10 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         DEBUG("mainContent", mainContent);
         if(!mainContent) return;
         // Twitch clip 링크 찾기
-        $(mainContent).find("div.se-module-oglink").each(function(index, elem){
+        $(mainContent).arrive("div.se-module-oglink", {
+            onlyOnce: true,
+            existing: true
+        }, function(elem) {
             try{
                 var $elem = $(elem);
                 if($elem.hasClass("fired")) return;
@@ -80,16 +83,16 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                             if(NCTCL_Length == 0){
                                 if(NCTCL_SETTINGS.autoPlayFirstClip) isAutoPlay = true;
                                 if(NCTCL_SETTINGS.autoPlayFirstClip && NCTCL_SETTINGS.autoPlayFirstClipMuted) isMuted = true;
-                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
+                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted, true);
                             }
                             else if(NCTCL_Length < NCTCL_SETTINGS.autoLoadLimit){
-                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted);
+                                changeToTwitchCilpIframe($elem, clipId, isAutoPlay, isMuted, true);
                             }
                             else{
                                 if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
                                 $a.on("click", function(e){
                                     e.preventDefault();
-                                    changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted);
+                                    changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted, false);
                                 });
                             }
                         
@@ -107,7 +110,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                             if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
                             $a.on("click", function(e){
                                 e.preventDefault();
-                                changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted);
+                                changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted, false);
                             });
                         }
                     });
@@ -118,9 +121,23 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
         });
     }
+
+    var letswatch = function (cb) {
+        DEBUG("letswatch");
+        var myIframe = document.getElementById("cafe_main");
+        var oldonload = myIframe.onload;
+        if (typeof myIframe.onload != 'function') {
+            myIframe.onload = cb;
+        } else {
+            window.onload = function() {
+                oldonload();
+                cb();
+            }
+        }
+    }
+
     if(NCTCL_SETTINGS.use){
-        loop();
-        setInterval(loop, NCTCL_SETTINGS.timerDelay);
+        letswatch(loop);
     }
 
     return;
