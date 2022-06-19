@@ -92,7 +92,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                                 if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
                                 $a.on("click", function(e){
                                     e.preventDefault();
-                                    changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted, false);
+                                    changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, false, false);
                                 });
                             }
                         
@@ -110,7 +110,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                             if($a.hasClass("se-oglink-thumbnail")) $a.addClass("hoverPlayButton");
                             $a.on("click", function(e){
                                 e.preventDefault();
-                                changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, NCTCL_SETTINGS.clickRequiredMuted, false);
+                                changeToTwitchCilpIframe($(e.target), clipId, NCTCL_SETTINGS.clickRequiredAutoPlay, false, false);
                             });
                         }
                     });

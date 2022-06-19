@@ -10,15 +10,6 @@
             #NCTCL_setting .btn {
                 font-size: 12px;
             }
-            #NCTCL_setting .btn-xxs {
-                cursor: pointer;
-                padding: 4px 4px;
-            }
-            #NCTCL_setting label.btn-xxs {
-                box-sizing: content-box;
-                width: 11px;
-                height: 11px;
-            }
             #NCTCL_setting a {
                 color: #428bca;
                 text-decoration: none;
@@ -127,7 +118,8 @@
             #NCTCL_setting input {
                 display: inline;
             }
-            #NCTCL_setting input[type="text"] {
+            #NCTCL_setting input[type="text"]
+            ,#NCTCL_setting input[type="number"] {
                 width: 100px;
                 height: 30px;
                 padding: 5px 5px;
@@ -139,32 +131,19 @@
                 padding: 5px 5px;
                 font-size: 12px;
             }
-            #NCTCL_setting input[type="checkbox"] {
-                /* display: none; */
+            #NCTCL_setting input[type="checkbox"]
+            ,#NCTCL_setting input[type="radio"] {
                 width: 20px;
                 height: 20px;
                 padding: 0;
                 margin: 0;
             }
-            #NCTCL_setting input[type="radio"] {
-                width: 20px;
-                height: 20px;
-                padding: 0;
-                margin: 0;
-            }
-
             #NCTCL_setting .radio-inline {
                 padding-left: 0;
                 padding-right: 10px;
             }
             #NCTCL_setting .radio-inline input {
                 margin: 0 5px 0 0;
-            }
-
-            #NCTCL_setting .NCTCL_setting_item_disable,
-            #NCTCL_setting .NCTCL_setting_item_disable .NCTCL_setting_title,
-            #NCTCL_setting .NCTCL_setting_item_disable .NCTCL_setting_desc {
-                color: #ccc !important;
             }
             #NCTCL_setting .invalid input,
             #NCTCL_setting .invalid textarea {
@@ -191,24 +170,6 @@
                 color: #6441a5;
                 font-style: italic;
             }
-
-            #NCTCL_setting .btn-xxs {
-                cursor: pointer;
-                padding: 4px 4px;
-            } /*padding: 1px 2px;font-size: 9px;line-height: 1.0;border-radius: 3px;margin:0 2px 2px 0;*/
-            /* #NCTCL_setting .btn-xxs .glyphicon {
-            }
-            #NCTCL_setting .btn-xxs span.glyphicon {
-                font-size: 11px;
-                opacity: 0.1;
-            }
-            #NCTCL_setting .btn-xxs.active span.glyphicon {
-                opacity: 0.9;
-            }
-            #NCTCL_setting .btn-xxs.disable {
-                opacity: 0.3;
-                cursor: not-allowed;
-            } */
             #NCTCL_setting_footer {
                 padding: 30px 0 30px 0;
                 margin: 30px 0 0 0;
@@ -271,28 +232,7 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_key="videoWidth" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
-                    <div class="NCTCL_setting_category_blank"></div>
-                    <div class="NCTCL_setting_list_head">
-                        <span class="NCTCL_setting_title">비디오 가로 사이즈(%)</span>
-                        <span class="NCTCL_setting_desc">
-                            클립 가로 사이즈를 결정합니다.<br />
-                            (Default: 100, Range: 1~100)
-                        </span>
-                    </div>
-                    <div class="NCTCL_setting_input_container form-group">
-                        <input
-                            class="form-control"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            type="number"
-                            name="videoWidth"
-                            min="1" max="100"
-                        />
-                    </div>
-                </li>
+                <!-- 동작 방식 : 클립 링크 변환 시점 -->
                 <li NCTCL_setting_key="method" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
                     <div class="NCTCL_setting_category_name">동작 방식</div>
                     <div class="NCTCL_setting_list_head">
@@ -325,7 +265,7 @@
                                     type="radio"
                                     name="method"
                                 />
-                                링크 클릭 시
+                                섬네일 클릭 시
                             </label>
                         </div>
                     </div>
@@ -386,9 +326,9 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredAutoPlay" NCTCL_setting_depth="3" class="NCTCL_setting_depth3 ">
-                    <div class="NCTCL_setting_category_name">링크 클릭 시</div>
-                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 로드 시 클립 자동 재생</span><span class="NCTCL_setting_desc">클릭과 동시에 클립을 자동 재생합니다.</span></div>
+                <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredAutoPlay" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
+                    <div class="NCTCL_setting_category_name">섬네일 클릭 시</div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 로드 시 클립 자동 재생</span><span class="NCTCL_setting_desc">섬네일 클릭과 동시에 클립을 자동 재생합니다. 이 옵션을 사용하면 클립이 간혹 음소거 상태로 재생될 수 있습니다.</span></div>
                     <div class="NCTCL_setting_input_container form-group">
                         <input
                             class="form-control"
@@ -402,7 +342,7 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredMuted" NCTCL_setting_depth="3" class="NCTCL_setting_depth3 ">
+                <!-- <li NCTCL_setting_radio_enable_value="clickRequired" NCTCL_setting_key="clickRequiredMuted" NCTCL_setting_depth="3" class="NCTCL_setting_depth3 ">
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 로드 시 클립 음소거</span><span class="NCTCL_setting_desc">클립 재생 시 음소거 상태로 시작합니다.</span></div>
                     <div class="NCTCL_setting_input_container form-group">
@@ -417,18 +357,185 @@
                             toggle="method:clickRequired"
                         />
                     </div>
+                </li> -->
+                <li gm_setting_key="set_volume_when_stream_starts" gm_setting_depth="1" class="NCTCL_setting_category NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_name">고급 설정</div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">클립 로드 시 특정 사운드 볼륨(Volume)으로 설정</span>
+                        <span class="NCTCL_setting_desc">TIP: Chrome 계열 브라우저는 자동 재생되는 클립을 종종 음소거합니다. 음소거 문제를 피하려면 본 옵션을 사용해보세요(안 될 수도 있음).</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input 
+                            class="form-control" 
+                            autocomplete="off" 
+                            autocorrect="off" 
+                            autocapitalize="off" 
+                            spellcheck="false" 
+                            type="checkbox" 
+                            name="set_volume_when_stream_starts" 
+                        />
+                    </div>
                 </li>
-                <!-- 고급 설정 -->
+                <li gm_setting_key="target_start_volume" gm_setting_depth="2" class="NCTCL_setting_depth2" style="">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">Volume</span>
+                        <span class="NCTCL_setting_desc">(Max Volume: 1.0, 음소거: 0.0, 범위: 0.0 ~ 1.0)</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input 
+                            class="form-control" 
+                            autocomplete="off" 
+                            autocorrect="off" 
+                            autocapitalize="off" 
+                            spellcheck="false" 
+                            type="text" 
+                            gm_setting_type="text" 
+                            gm_setting_key="target_start_volume"
+                            gm_setting_category="type" 
+                            gm_setting_radio_enable_value="none" 
+                        />
+                    </div>
+                </li>
+                <!-- 비디오 사이즈 지정 -->
+                <li NCTCL_setting_key="videoWidth" NCTCL_setting_depth="1" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">비디오 가로 사이즈(%)</span>
+                        <span class="NCTCL_setting_desc">
+                            클립 가로 사이즈를 결정합니다.<br />
+                            (Default: 100, Range: 1~100)
+                        </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input
+                            class="form-control"
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            type="number"
+                            name="videoWidth"
+                            min="1" max="100"
+                        />
+                    </div>
+                </li>
+                <!-- 비디오 재생 시 다른 비디오 일시정지 -->
+                <li gm_setting_key="autoPauseOtherClips" gm_setting_depth="1" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">비디오 재생 시 다른 재생 중인 비디오 일시정지</span>
+                        <span class="NCTCL_setting_desc">
+                            Twitch Clip 또는 Naver Video 를 재생 시, 다른 재생 중인 모든 Naver Video 와 Twitch Clip 을 일시정지 합니다. 다음 클립을 재생하기 위하여 이전 클립을 정지할 필요가 없습니다. (엄청 편하다!)
+                        </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+
+                            <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="autoPauseOtherClips" gm_setting_category="advanced" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <!-- 네이버 비디오에도 적용 -->
+                <li gm_setting_key="autoPauseOtherClipsForNaverVideo" gm_setting_depth="2" class="NCTCL_setting_depth2">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">네이버 비디오에도 적용</span>
+                        <span class="NCTCL_setting_desc">네이버 비디오 관련 재생 문제가 발생 시 본 옵션을 끄세요.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                            <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="autoPauseOtherClipsForNaverVideo" gm_setting_category="advanced" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <li gm_setting_key="removeOriginalLinks" gm_setting_depth="2" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">클립 원본 링크 삭제</span>
+                        <span class="NCTCL_setting_desc">클립 링크를 비디오로 변환 시, 본문에 동일한 링크가 존재하는 경우 삭제하여 보기 좋게 만듭니다.</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                            <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="removeOriginalLinks" gm_setting_category="advanced" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <li gm_setting_key="autoPlayNextClip" gm_setting_depth="2" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">다음 클립을 자동으로 이어서 재생</span>
+                        <span class="NCTCL_setting_desc">본문에 여러 Twitch Clip 이 존재하는 경우, 클립이 종료되면 다음 클립을 자동으로 재생합니다. (편하다!)</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                            <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="autoPlayNextClip" gm_setting_category="advanced" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <li gm_setting_key="play_and_pause_by_click" gm_setting_depth="1" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">Twitch Clip 페이지 스타일로 표시</span>
+                        <span class="NCTCL_setting_desc">
+                            클립 화면을 클릭하여 재생 및 일시정지 되도록 만듭니다. (편하다!)<br>
+                            일시정지 시 상단 오버레이와 재생 버튼을 숨깁니다. 재생 중 화면을 더블 클릭하여 전체화면을 할 수 있습니다.
+                        </span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="play_and_pause_by_click" gm_setting_category="advanced" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <!-- 편의 기능 -->
+                <li gm_setting_key="naverVideoAutoMaxQuality" gm_setting_depth="1" class="NCTCL_setting_category NCTCL_setting_depth1" style="">
+                    <div class="NCTCL_setting_category_name">편의 기능</div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">네이버 비디오를 항상 최대 화질로 시작</span><span class="NCTCL_setting_desc">네이버 비디오를 로드할 때 선택 가능한 최대 화질로 자동 설정합니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="naverVideoAutoMaxQuality" gm_setting_category="etc" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <!-- 전체화면 스크롤 동작 개선 -->
+                <li gm_setting_key="fixFullScreenScrollChange" gm_setting_depth="1" class="NCTCL_setting_depth1" style="">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">전체화면 스크롤 동작 개선</span>
+                        <span class="NCTCL_setting_desc">비디오를 전체화면 한 후 해제했을 때 스크롤이 다른 위치로 변경되는 문제를 개선합니다. 만약 전체화면 시 스크롤과 관련된 문제가 발생한다면 이 기능을 끄십시오.</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="fixFullScreenScrollChange" gm_setting_category="etc" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <!-- 게시판 글 기본 개수 설정 -->
+                <li gm_setting_key="naverBoardDefaultArticleCount" gm_setting_depth="1" class="NCTCL_setting_depth1" style="">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">게시판 글 기본 개수 설정</span><span class="NCTCL_setting_desc">게시판에서 기본으로 표시할 글 개수를 설정할 수 있습니다.</span></div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <select name="NCTCL_setting_naverBoardDefaultArticleCount" class="form-control input-sm select-inline" gm_setting_type="combobox" gm_setting_key="naverBoardDefaultArticleCount" gm_setting_category="etc" gm_setting_radio_enable_value="none">
+                            <option spellcheck="false" value="0" >기본값 사용</option>
+                            <option spellcheck="false" value="5" >5</option>
+                            <option spellcheck="false" value="10" >10</option>
+                            <option spellcheck="false" value="15" >15</option>
+                            <option spellcheck="false" value="20" >20</option>
+                            <option spellcheck="false" value="30" >30</option>
+                            <option spellcheck="false" value="40" >40</option>
+                            <option spellcheck="false" value="50" >50</option>
+                        </select>
+                    </div>
+                </li>
+                <!-- 네이버 카페 새로고침 개선 -->
+                <li gm_setting_key="improvedRefresh" gm_setting_depth="1" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title" style="color: #00498c;">[실험적] 네이버 카페 새로고침 개선</span>
+                        <span class="NCTCL_setting_desc">네이버 카페에서 새로고침 시, 메인 화면 대신 이전에 탐색한 페이지를 불러옵니다. 만약 새로고침 시 문제가 발생한다면 이 기능을 끄십시오.</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  type="checkbox" gm_setting_type="checkbox" gm_setting_key="improvedRefresh" gm_setting_category="etc" gm_setting_radio_enable_value="none">
+                    </div>
+                </li>
+                <!-- 리셋 -->
                 <li class="NCTCL_setting_category NCTCL_setting_depth1">
                     <div class="NCTCL_setting_category_name">Reset</div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">
-                            <button id="reset" class="NCTCL_setting_reset btn btn-warning font-style: black;">Reset All</button>
+                            <button id="reset" class="NCTCL_setting_reset btn btn-warning">Reset All</button>
                         </span>
                         <span class="NCTCL_setting_desc"></span>
                     </div>
                     <div class="NCTCL_setting_input_container form-group"></div>
                 </li>
+                <!-- 후원 배너 -->
                 <li class="NCTCL_setting_category NCTCL_setting_depth1">
                     <div class="NCTCL_setting_category_name">
                        후원하기
@@ -461,6 +568,7 @@
                     </div>
                  </li>
               </ul>
+              <!-- footer -->
               <div id="NCTCL_setting_footer">
                  <a href="https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader"
                     target="_blank">NCTC-Loader</a> v0.5.1

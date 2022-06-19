@@ -56,8 +56,7 @@ const NCTCL_INIT_SETTINGS = {
   autoLoadLimit: 3,
   autoPlayFirstClip: false,
   autoPlayFirstClipMuted: true,
-  clickRequiredAutoPlay: true,
-  clickRequiredMuted: false,
+  clickRequiredAutoPlay: true
 }
 
 class NCTCLM{
