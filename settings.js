@@ -56,10 +56,10 @@ $(document).ready(function(){
     })();
 
     // number input type limit to min~max
-    $('input[type="number"]').on('input change keyup paste', function () {
-        if (this.min) this.value = Math.max(parseInt(this.min), parseInt(this.value) || 0);
-        if (this.max) this.value = Math.min(parseInt(this.max), parseInt(this.value) || 0);
-      });
+    $('input[type="number"]').on('change paste', function () {
+        if (this.min) this.value = Math.max(Number(this.min), Number(this.value) || 0);
+        if (this.max) this.value = Math.min(Number(this.max), Number(this.value) || 0);
+    });
 
     // if click on reset button, reset settings
     $('#reset').click(function(){

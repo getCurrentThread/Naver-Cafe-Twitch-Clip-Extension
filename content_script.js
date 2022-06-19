@@ -17,7 +17,48 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     }
     reCalculateIframeWidth(contentWidth);
 
-
+    // Twitch clip 링크 설명 삽입
+    var insertTwitchCilpDescription = function($elem, clipId){
+        try{
+            var $parentContainer = $elem.closest("div.se-section-oglink");
+            var $article_container = $elem.closest("div.article_container");
+            $parentContainer.find(".se-oglink-info").hide();
+            if($article_container.length !== 0) {
+                reCalculateIframeWidth($article_container.width());
+            }
+            var clipurl = `https://clips.twitch.tv/${clipId}`;
+            var $title = $parentContainer.find(".se-oglink-title");
+            var title = "", titleText = "", clipurlText = clipurl;
+            if($title.length !== 0){
+                title = escapeHtml($title.text());
+                titleText = `<span class="NCTCL-titleText">${title}</span>`;
+                clipurlText = `<span class="NCTCL-clipurlText">(<span class="UnderLine">${clipurl}</span>)</span>`;
+            }
+            $parentContainer.append(`
+                <div class="NCTCL-container">
+                    <div class="NCTCL-iframe-container" data-clip-id="${clipId}"></div>
+                    <div class="NCTCL-description" data-clip-id="${clipId}">
+                        <a title="클릭 시 다음의 Twitch Clip 페이지로 이동합니다. ${clipurl}" href="${clipurl}" class="se-link" target="_blank">
+                            <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="14" height="14" viewBox="0 0 256 256" xml:space="preserve">
+                                <g transform="translate(128 128) scale(0.72 0.72)" style="">
+                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" >
+                                        <path d="M 2.015 15.448 v 63.134 h 21.493 V 90 h 12.09 l 11.418 -11.418 h 17.463 l 23.507 -23.507 V 0 H 8.06 L 2.015 15.448 z M 15.448 8.06 h 64.478 v 42.985 L 66.493 64.478 H 45 L 33.582 75.896 V 64.478 H 15.448 V 8.06 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(97,59,162); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <rect x="58.43" y="23.51" rx="0" ry="0" width="8.06" height="23.48" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(97,59,162); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "/>
+                                        <rect x="36.94" y="23.51" rx="0" ry="0" width="8.06" height="23.48" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(97,59,162); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "/>
+                                    </g>
+                                </g>
+                            </svg>
+                            ${titleText}
+                            ${clipurlText}
+                        </a>
+                    </div>
+                </div>
+            `);
+        }
+        catch(e){
+            DEBUG("Error from insertTwitchCilpDescription", e);
+        }
+    }
     // Twitch clip 링크를 iframe 으로 변환
     var changeToTwitchCilpIframe = function($elem, clipId, autoPlay, muted, lazy) {
         try{
@@ -74,9 +115,11 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     var href = $a.attr("href");
                     var match = href.match(regex);
 
-                    if(!!match && match.length > 1){
+                    if(match !== null && match.length > 1){
                         var clipId = match[1];
-                        DEBUG("clipId", clipId);
+                        removeOriginalLinks(href);
+                        insertTwitchCilpDescription($elem, clipId);
+                        DEBUG("TWITCH CILP FOUND, CLIP ID = ", clipId);
                         var isAutoPlay = false;
                         var isMuted = false;
                         var NCTCL_Length = mainContent.querySelectorAll(".NCTCL-iframe").length;
@@ -120,7 +163,148 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                 console.error("Error from arrive", e);
             }
         });
-    }
+
+        // 임베디드 비디오에 대한 추가 조정 (소리, 자동재생, 비디오 사이즈)
+        $(mainContent).arrive("video", { onlyOnce: true, existing: true }, function (video) {
+            DEBUG("video", video);
+            
+            // 재생 이벤트
+            video.addEventListener("play", (e) => {
+                let $e = $(e.target);
+                DEBUG("twitch clip play()", e);
+                if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip) window.parent.postMessage({"type":"NCTCL", "event":"play", "clipId":clipId}, "https://cafe.naver.com");
+                
+                if(!$e.hasClass("_FIRSTPLAYED")){
+                    $e.addClass("_FIRSTPLAYED");
+                    // TODO: CSS 테마를 하단에 넣어야함
+                }
+            });
+
+            // 일시정지 이벤트
+            video.addEventListener("pause", (e) => {
+                DEBUG("twitch clip pause()", e);
+                if(NCTCL_SETTINGS.autoPauseOtherClips) window.parent.postMessage({"type":"NCTCL", "event":"pause", "clipId":clipId}, "https://cafe.naver.com");
+            });
+
+            // 종료 이벤트
+            video.addEventListener("ended", (e) => {
+                DEBUG("twitch clip ended()", e);
+                if(NCTCL_SETTINGS.autoPlayNextClip) window.parent.postMessage({"type":"NCTCL", "event":"ended", "clipId":clipId}, "https://cafe.naver.com");
+            });
+
+            // setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
+            if(NCTCL_SETTINGS.setVolumeWhenStreamStarts && !is_volume_changed){
+                if(video.volume !== undefined){
+                    DEBUG("MUTE?", video.muted, "CURRENT VOLUME", video.volume, "TARGET VOLUME", NCTCL_SETTINGS.targetStartVolume);
+                    setTimeout(function(){
+                        if(NCTCL_SETTINGS.targetStartVolume !== 0.0){
+                            video.muted = false; // 기본 볼륨이 0아니라면 음소거를 해제해야 함
+                        }
+                        // 실제 볼륨 조절
+                        video.volume = NCTCL_SETTINGS.targetStartVolume;
+                        is_volume_changed = true;
+                    }, 100);
+                }
+            }
+        });
+
+        // 클립 자동 정지 
+        var autoPauseVideo = function(e){
+            if(!NCTCL_SETTINGS.use) return;
+            if(!NCTCL_SETTINGS.autoPauseOtherClips && !NCTCL_SETTINGS.autoPlayNextClip) return;
+            if(e.origin === "https://clips.twitch.tv" && e.data.type === "NCTCL"){
+                DEBUG("autoPauseVideo", e.data);
+                if(e.data.clipId === undefined || e.data.clipId === "") return;
+
+                var $iframes = $(mainContent).find("div.NCTCL-container iframe");
+                var endedNextFound = false;
+                $iframes.each(function(i, v){
+                    switch(e.data.event){
+                        default:
+                            return false;
+                            // break;
+                        case "play":
+                            if(!NCTCL_SETTINGS.autoPauseOtherClips) return false;
+                            if(v.dataset.clipId === e.data.clipId) return true;
+                            var newData = {"type":"NCTCL", "event":"pause", "clipId":e.data.clipId};
+                            v.contentWindow.postMessage(newData, "https://clips.twitch.tv");
+                            break;
+                        case "ended":
+                            if(!NCTCL_SETTINGS.autoPlayNextClip) return false;
+                            if(endedNextFound){
+                                var newData = {"type":"NCTCL", "event":"play", "clipId":v.dataset.clipId};
+                                v.contentWindow.postMessage(newData, "https://clips.twitch.tv");
+                                return false;
+                            }
+                            if(v.dataset.clipId === e.data.clipId){
+                                endedNextFound = true;
+                                return true;
+                            }
+                    }
+                });
+
+                // for naver video
+                if(!NCTCL_SETTINGS.autoPauseOtherClips || !NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo) return true;
+                if(e.data.event == "play"){
+                    var $videos = $(mainContent).find("video");
+                    $videos.each(function(i, v){
+                        var $nvideo = $(v);
+                        var $id = $nvideo.attr("id");
+                        if(e.data.clipId == $id) return;
+                        if(!$nvideo.hasClass("_FIRSTPLAYED") || $nvideo[0].paused) return;
+
+                        var $sevideo = $nvideo.closest(".se-video");
+                        if ($sevideo.length == 0) {
+                            DEBUG("no se-video");
+                            return;
+                        }
+
+                        var $playbtn = $sevideo.find(".u_rmc_play_area button");
+                        if($playbtn.length == 0) {
+                            DEBUG("no playbtn");
+                            return;
+                        }
+
+                        $playbtn.trigger("click");
+                        DEBUG("NAVER VIDEO PAUSE");
+                    });
+                }
+            }
+        }
+
+        // 메시지 이벤트가 발생하는 경우에 클립 정지 이벤트 함수 호출
+        window.addEventListener("message", function(e){
+            autoPauseVideo(e);
+        });
+
+        // 오리지널 링크를 제거하는 함수
+        var removeOriginalLinks = function(url){
+            if(!NCTCL_SETTINGS.use) return;
+            if(!NCTCL_SETTINGS.removeOriginalLinks) return;
+            try{
+                var $as = $(mainContent).find("a.se-link");
+                $as.each(function(i, v){
+                    var $a = $(v);
+                    var href = $a.attr("href");
+                    if(href !== url || $a.hasClass("fired")){
+                        return true;
+                    }
+
+                    var $p = $a.closest("p");
+                    if($p.text() === url){
+                        $p.remove();
+                    }
+                    else{
+                        $a.remove();
+                    }
+                });
+            }
+            catch(e){
+                DEBUG("Error from removeOriginalLinks", e);
+            }
+        }
+    } // end loop.
+
 
     var letswatch = function (cb) {
         DEBUG("letswatch");
