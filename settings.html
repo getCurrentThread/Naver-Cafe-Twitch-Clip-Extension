@@ -4,14 +4,11 @@
         <meta charset="utf-8">
         <title>Naver-Cafe-Twitch-Clip-Extension 상세 설정 페이지</title>
         <style>
+            body #NCTCL_setting {
+                min-width:900px;
+            }
             #NCTCL_setting .btn {
                 font-size: 12px;
-            }
-            .NCTCL_setting_autosaved.btn {
-                max-width: 100%;
-                font-size: 12px;
-                white-space: pre-wrap;
-                user-select: text;
             }
             #NCTCL_setting .btn-xxs {
                 cursor: pointer;
@@ -88,23 +85,23 @@
             }
             #NCTCL_setting .NCTCL_setting_depth1 .NCTCL_setting_list_head {
                 padding-left: 0px;
-                width: 300px;
+                width: 370px;
             }
             #NCTCL_setting .NCTCL_setting_depth2 .NCTCL_setting_list_head {
                 padding-left: 30px;
-                width: 270px;
+                width: 340px;
             }
             #NCTCL_setting .NCTCL_setting_depth3 .NCTCL_setting_list_head {
                 padding-left: 60px;
-                width: 240px;
+                width: 310px;
             }
             #NCTCL_setting .NCTCL_setting_depth4 .NCTCL_setting_list_head {
                 padding-left: 90px;
-                width: 210px;
+                width: 280px;
             }
             #NCTCL_setting .NCTCL_setting_depth5 .NCTCL_setting_list_head {
                 padding-left: 120px;
-                width: 180px;
+                width: 250px;
             }
 
             #NCTCL_setting .NCTCL_setting_title {
@@ -258,6 +255,7 @@
                 </div>
             </div>
             <ul id="NCTCL_setting">
+                <!-- General -->
                 <li NCTCL_setting_key="use" NCTCL_setting_depth="1" class="NCTCL_setting_depth1">
                     <div class="NCTCL_setting_category_name">General</div>
                     <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 링크 자동 변환</span><span class="NCTCL_setting_desc">클립 링크 자동 변환 기능을 사용합니다.</span></div>
@@ -319,8 +317,11 @@
                     </div>
                 </li> -->
                 <li NCTCL_setting_key="method" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
-                    <div class="NCTCL_setting_category_blank"></div>
-                    <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 링크 변환 시점 선택</span><span class="NCTCL_setting_desc">클립 링크를 비디오로 변환하는 시점을 선택</span></div>
+                    <div class="NCTCL_setting_category_name">동작 방식</div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">클립 링크 변환 시점 선택</span>
+                        <span class="GM_setting_desc"> - 페이지 로딩 시: 섬네일을 비디오로 자동 변환<br> - 섬네일 클릭 시: 섬네일을 클릭할 때 비디오로 변환</span>
+                    </div>
                     <div class="NCTCL_setting_input_container form-group">
                         <div>
                             <label class="radio-inline">
@@ -390,8 +391,6 @@
                                 name="autoPlayFirstClip"
                                 toggle="method:autoLoad"
                             />
-                            <!-- <span class="glyphicon glyphicon-ok"></span> -->
-                       
                     </div>
                 </li>
                 <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClipMuted" NCTCL_setting_depth="3" class="NCTCL_setting_depth3">
@@ -442,6 +441,7 @@
                         />
                     </div>
                 </li>
+                <!-- 고급 설정 -->
                 <li class="NCTCL_setting_category NCTCL_setting_depth1">
                     <div class="NCTCL_setting_category_name">Reset</div>
                     <div class="NCTCL_setting_list_head">
