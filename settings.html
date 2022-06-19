@@ -293,29 +293,6 @@
                         />
                     </div>
                 </li>
-                <!-- <li NCTCL_setting_key="timerDelay" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
-                    <div class="NCTCL_setting_category_blank"></div>
-                    <div class="NCTCL_setting_list_head">
-                        <span class="NCTCL_setting_title">스케쥴러 동작 (ms)</span>
-                        <span class="NCTCL_setting_desc">
-                            클립 전환 타이머를 조정합니다.<br />
-                            (Default: 4000, Range: 500~)
-                        </span>
-                    </div>
-                    <div class="NCTCL_setting_input_container form-group">
-                        <input
-                            class="form-control"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            type="number"
-                            name="timerDelay"
-                            min="500"
-                            step="100"
-                        />
-                    </div>
-                </li> -->
                 <li NCTCL_setting_key="method" NCTCL_setting_depth="2" class="NCTCL_setting_depth2">
                     <div class="NCTCL_setting_category_name">동작 방식</div>
                     <div class="NCTCL_setting_list_head">
@@ -360,7 +337,7 @@
                         <span class="NCTCL_setting_desc">
                             페이지 로딩 시점에 비디오로 변환할 링크의 최대 개수를 설정합니다. 최대 개수를 초과한 클립부터는 링크를 클릭하는 경우에만 비디오로 변환됩니다. 이 개수를 크게 설정하면 클립이 많은 글에서 브라우저가 한참동안 멈출 수
                             있습니다.<br />
-                            (Default: 5, Range: 1~1000)
+                            (Default: 3, Range: 1~200)
                         </span>
                     </div>
                     <div class="NCTCL_setting_input_container form-group">
@@ -372,7 +349,7 @@
                             spellcheck="false"
                             type="number"
                             name="autoLoadLimit"
-                            min="1" max="1000"
+                            min="1" max="200"
                             toggle="method:autoLoad"
                         />
                     </div>
@@ -447,8 +424,6 @@
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">
                             <button id="reset" class="NCTCL_setting_reset btn btn-warning font-style: black;">Reset All</button>
-                            <!-- <button id="save" class="NCTCL_setting_reset btn btn-success" style="margin-left: 0;">save</button> -->
-                            <!--<span class="NCTCL_setting_reset_all btn btn-primary">전체 초기화(새로고침 필요)</span>-->
                         </span>
                         <span class="NCTCL_setting_desc"></span>
                     </div>
@@ -469,7 +444,7 @@
                     </div>
                     <div class="NCTCL_setting_input_container form-group">
                        <a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img
-                          src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee"
+                          src="images/default-yellow.png" alt="Buy Me A Coffee"
                           height="41" width="174" /></a>
                     </div>
                  </li>
@@ -481,7 +456,7 @@
                     </div>
                     <div class="NCTCL_setting_input_container form-group">
                        <a href="https://toon.at/donate/636947867320352181" target="_blank"><img
-                          src="https://raw.githubusercontent.com/nomomo/Addostream/master/assets/toonation_b11.gif"
+                          src="images/toonation_b11.gif"
                           height="41" alt="Donate with Toonation" /></a>
                     </div>
                  </li>
