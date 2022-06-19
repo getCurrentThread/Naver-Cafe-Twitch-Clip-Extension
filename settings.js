@@ -1,6 +1,6 @@
 // document ready
 $(document).ready(function(){
-    // init the welcome page on input value.
+    // init the settings page on input value.
     (async () => {
         //get NCTCLM settings
         let settings = await NCTCLM.loadSettings();

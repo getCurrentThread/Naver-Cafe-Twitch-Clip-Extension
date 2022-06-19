@@ -29,8 +29,8 @@
           "utils.js",
           "popup.html",
           "popup.js",
-          "welcome.html",
-          "welcome.js"
+          "settings.html",
+          "settings.js"
         ]
       }
     ],
