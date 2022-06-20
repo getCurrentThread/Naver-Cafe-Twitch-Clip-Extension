@@ -9,3 +9,14 @@
 .NCTCL-iframe-container .se-link{
     display: inline-block; padding: 10px 15px; border: 1px solid #eee; box-sizing: border-box; text-align: right; margin-top: -1px;
 }
+
+/* playAndPauseByClick */
+/* html body .top-bar
+,[data-a-target="player-twitch-logo-button"]{
+    display:none !important;
+}
+
+html body .video-player__container
+,html body .video-player{
+    background:unset;
+} */

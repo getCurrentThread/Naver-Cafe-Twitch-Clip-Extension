@@ -303,12 +303,99 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                 DEBUG("Error from removeOriginalLinks", e);
             }
         }
+
+    
+        // improvedRefresh : [실험적] 향상된 새로고침
+    function improvedRefresh(){
+        try{
+            DEBUG("improvedRefresh");
+            const $cafeMain = $("#cafe_main");
+
+            // 카페 메인 컨텐츠를 불러 올 수 없다면 과정 취소
+            if($cafeMain.length === 0){
+                return;
+            }
+
+            var saveCurrentCafeMainUrl = function()
+            {
+                // 현재 페이지 위치를 저장
+                let lastCafeMainUrl = $cafeMain[0].contentWindow.location.href;
+                
+                DEBUG("save lastCafeMainUrl", lastCafeMainUrl);
+                localStorage.setItem('lastCafeMainUrl', JSON.stringify({
+                    "url":lastCafeMainUrl,
+                    "date":Number(new Date())
+                }));
+            }
+
+            if($cafeMain.attr('refreshed') !== "true"){
+                $cafeMain.attr('refreshed', 'true');
+                // 아래는 새로고침 시에 가장 마지막에 접속했던 주소와 url이 다르다면 리다이렉션을 합니다.
+                (() => {
+                    let savedLastCafeMainUrl = {url:undefined, date:-1};
+                    try{
+                        let savedLSLSCMU = localStorage.getItem('lastCafeMainUrl');
+                        if(savedLSLSCMU === null){
+                            DEBUG("savedLSLSCMU = null");
+                            return;
+                        }
+                        savedLastCafeMainUrl = JSON.parse(savedLSLSCMU);
+                    }
+                    catch(e){
+                        DEBUG("Error from improvedRefresh JSON.parse", e);
+                        return;
+                    }
+        
+                    DEBUG("savedLastCafeMainUrl", savedLastCafeMainUrl);
+                    if(document.location.href === savedLastCafeMainUrl.url /*|| 
+                        (document.location.href.match(/^https:\/\/cafe.naver.com\/\\w*$/) !== null 
+                        && savedLastCafeMainUrl.url.indexOf("https://cafe.naver.com/MyCafeIntro.nhn") !== -1)*/
+                    ){
+                        DEBUG("저장된 url 과 현재 url 이 같다", savedLastCafeMainUrl.url);
+                        return;
+                    }
+
+                    var exceptUrl = ["https://cafe.naver.com/MyCafeListGNBView.nhn"];
+                    for(var i=0;i<exceptUrl.length;i++){
+                        if(document.location.href.indexOf(exceptUrl[i]) !== -1){
+                            DEBUG("예외 목록에 포함된 URL", exceptUrl[i], document.location.href);
+                            return;
+                        }
+                    }
+            
+                    const parentWindowRefreshed = String(window.top.performance.getEntriesByType("navigation")[0].type) === "reload";
+                    let refreshDelay = Number(new Date()) - savedLastCafeMainUrl.date;
+            
+                    DEBUG("PARENT REFRESHED? = ", parentWindowRefreshed, "CURRENT URL = ", document.location.href, ", REFRESHDELAY = ", refreshDelay);
+        
+                    if(parentWindowRefreshed && refreshDelay > 2000.0){
+                        DEBUG("LOAD SAVED IFRAME URL. CURRRENT URL = ", document.location.href, ", SAVED URL = ", savedLastCafeMainUrl.url);
+                        document.location.href = savedLastCafeMainUrl.url;
+                        return;
+                    }
+                })();
+                saveCurrentCafeMainUrl();
+            }
+            else{
+                // 현재 페이지 위치를 저장
+                saveCurrentCafeMainUrl();
+            }
+        }
+        catch(e){
+            DEBUG("Error from improvedRefresh", e);
+        }
+    }
+        
+    if(NCTCL_SETTINGS.improvedRefresh){
+        improvedRefresh();
+    }
     } // end loop.
 
 
     var letswatch = function (cb) {
         DEBUG("letswatch");
         var myIframe = document.getElementById("cafe_main");
+        if(myIframe == null) return;
         var oldonload = myIframe.onload;
         if (typeof myIframe.onload != 'function') {
             myIframe.onload = cb;
