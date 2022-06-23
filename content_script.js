@@ -368,14 +368,14 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             video.addEventListener("pause", (e) => {
                 DEBUG("twitch clip pause()", e);
                 if(NCTCL_SETTINGS.autoPauseOtherClips) 
-                    window.postMessage({"type":"NCTCL", "event":"pause", "clipId":$e.attr("id")}, "https://cafe.naver.com");
+                    window.postMessage({"type":"NCTCL", "event":"pause", "clipId":$(e.target).attr("id")}, "https://cafe.naver.com");
             });
 
             // 종료 이벤트
             video.addEventListener("ended", (e) => {
                 DEBUG("twitch clip ended()", e);
                 if(NCTCL_SETTINGS.autoPlayNextClip) 
-                    window.postMessage({"type":"NCTCL", "event":"ended", "clipId":$e.attr("id")}, "https://cafe.naver.com");
+                    window.postMessage({"type":"NCTCL", "event":"ended", "clipId":$(e.target).attr("id")}, "https://cafe.naver.com");
             });
 
             // TODO: setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
@@ -574,6 +574,81 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         //     }
         // }
 
+        // playAndPauseByClick
+        if(NCTCL_SETTINGS.playAndPauseByClick){
+            try {
+                DEBUG("playAndPauseByClick");
+
+                // $(mainContent).arrive("iframe.NCTCL-iframe", { existing: true }, function (iframe) {
+                //     const $iframe = $(iframe.contentDocument);
+                //     DEBUG("iframe.contentDocument", $iframe);
+                //     // $iframe.find("head").append(`<style>
+                //     //     html body .top-bar
+                //     //     ,[data-a-target="player-twitch-logo-button"]
+                //     //     {
+                //     //         display:none !important;
+                //     //     }
+                //     //     html body .video-player__container
+                //     //     ,html body .video-player{
+                //     //         background:unset;
+                //     //     }
+                //     //     </style>`);
+                //     $iframe.arrive("video", { existing: true }, function (video) {
+                //         const $video = $(video);
+                //         DEBUG("video", video);
+                //         $video.on("click", function (e) {
+                //             if ($video.prop("paused")) {
+                //                 $video.prop("play");
+                //             } else {
+                //                 $video.prop("pause");
+                //             }
+                //         });
+                //     });
+                // });
+                    // DEBUG("iframe.NCTCL-iframe", $iframe);
+                    // // add style on iframe.
+                    
+
+                    // var backgroundDblclicked = false;
+                    // var dblclickSetTimeout = undefined;
+
+                    // DEBUG($iframe.find("[data-a-target='player-overlay-click-handler']"));
+                    // $iframe.find("[data-a-target='player-overlay-click-handler']").on('click', (e) => {
+                    //     DEBUG('clicked - playing', e);
+                    //     $iframe.find("button[data-a-target='player-play-pause-button']").click();
+                    //     // e.target.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+
+                    //     backgroundDblclicked = true;
+                    //     clearTimeout(dblclickSetTimeout);
+                    //     dblclickSetTimeout = setTimeout(function(){
+                    //         backgroundDblclicked = false;
+                    //     },300);
+                    // });
+
+                //     $iframe.find(".player-overlay-background").on('click', (e) => {
+                //         DEBUG('clicked - end or play', e);
+                //         if($(e.target).find(".clip-postplay-recommendations").length !== 0){
+                //             DEBUG("There is recommendations div");
+                //             $iframe.querySelector("button[data-a-target='player-play-pause-button']").click();
+                //             // e.target.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+                //         }
+                //         else{
+                //             DEBUG("There is no recommendations div");
+                //         }
+
+                //         if(backgroundDblclicked){
+                //             clearTimeout(dblclickSetTimeout);
+                //             backgroundDblclicked = false;
+                //             $iframe.find("button[data-a-target='player-fullscreen-button']").click();
+                //             // e.target.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+                //         }
+                //     });
+                // });
+            } catch (e) {
+                DEBUG("ERROR FROM playAndPauseByClick", e);
+            }
+        }
+
         // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
         var parentHtml = parent.document.querySelector("html");
         var lastScrollY = parentHtml.scrollTop;
@@ -603,6 +678,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             DEBUG("Error from fixFullScreenScrollChange", e);
         }
 
+        // naverVideoAutoMaxQuality 네이버 동영상을 최대 화질로 고정합니다.
         if(NCTCL_SETTINGS.naverVideoAutoMaxQuality){
             $(mainContent).arrive(".u_rmc_definition_ly", { existing: true }, function (elem) {
                 setTimeout(function(){

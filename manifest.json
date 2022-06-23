@@ -47,6 +47,19 @@
           "content_script.js"
         ],
         "run_at": "document_idle"
+      },
+      {
+        "matches": [
+          "https://clips.twitch.tv/embed*"
+        ],
+        "all_frames": true,
+        "css": [],
+        "js": [
+          "lib/jquery-3.6.0.min.js",
+          "lib/arrive.min.js",
+          "utils.js",
+          "embed_twitch.js"
+        ]
       }
     ]
   }
