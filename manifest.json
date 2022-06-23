@@ -3,7 +3,7 @@
     "name": "네이버 카페 트위치 클립 익스텐션(NCTC Extension)",
     "description": "네이버 카페에서 트위치 클립 링크를 비디오로 볼 수 있습니다.",
     "homepage_url": "https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension",
-    "version": "0.1.0.0",
+    "version": "0.1.1.0",
     "author": "getCurrentThread",
     "action": {
       "default_icon": "images/thumbnail.png",
@@ -39,9 +39,7 @@
         "matches": [
           "https://cafe.naver.com/*"
         ],
-        "css": [
-          "inject.css"
-        ],
+        "css": [],
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",

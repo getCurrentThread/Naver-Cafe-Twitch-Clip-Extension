@@ -25,7 +25,7 @@ $(document).ready(function(){
                 if($this.is(':checkbox'))
                     settings[key] = this.checked
                 else if($this.is('[type=number]'))
-                    settings[key] = parseInt($this.val());
+                    settings[key] = Number($this.val());
                 else
                     settings[key] = $this.val();
                 //save settings
