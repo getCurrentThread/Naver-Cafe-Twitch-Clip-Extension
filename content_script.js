@@ -343,35 +343,6 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
         });
 
-        // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
-        var parentHtml = parent.document.querySelector("html");
-        var lastScrollY = parentHtml.scrollTop;
-        var checkIsFullScreen = function(){ return document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen };
-        try{
-            if(NCTCL_SETTINGS.fixFullScreenScrollChange /*&& window.self !== window.top*/){
-                $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
-                    var isFullScreen = checkIsFullScreen();
-                    DEBUG("FullScreen", isFullScreen);
-                    if(!isFullScreen){
-                        if(parentHtml.scrollTop !== lastScrollY){
-                            DEBUG("parentHtml.scrollTop = ", parentHtml.scrollTop, "lastScrollY = ", lastScrollY);
-                        }
-                        parentHtml.scrollTop = lastScrollY;
-                    }
-                });
-
-                $(parent.window).scroll(function() {
-                    var isFullScreen = checkIsFullScreen();
-                    if(!isFullScreen){
-                        lastScrollY = parentHtml.scrollTop;
-                    }
-                });
-            }
-        }
-        catch(e){
-            DEBUG("Error from fixFullScreenScrollChange", e);
-        }
-
         // 임베디드 비디오에 대한 추가 조정 (소리, 자동재생, 비디오 사이즈)
         $(mainContent).arrive("video", { onlyOnce: true, existing: true }, function (video) {
             DEBUG("video", video);
@@ -380,7 +351,8 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             video.addEventListener("play", (e) => {
                 let $e = $(e.target);
                 DEBUG("twitch clip play()", e);
-                if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip) window.postMessage({"type":"NCTCL", "event":"play", "clipId":clipId}, "https://cafe.naver.com");
+                if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip) 
+                    window.postMessage({"type":"NCTCL", "event":"play", "clipId":$e.attr("id")}, "https://cafe.naver.com");
                 
                 if(!$e.hasClass("_FIRSTPLAYED")){
                     $e.addClass("_FIRSTPLAYED");
@@ -395,16 +367,18 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             // 일시정지 이벤트
             video.addEventListener("pause", (e) => {
                 DEBUG("twitch clip pause()", e);
-                if(NCTCL_SETTINGS.autoPauseOtherClips) window.postMessage({"type":"NCTCL", "event":"pause", "clipId":clipId}, "https://cafe.naver.com");
+                if(NCTCL_SETTINGS.autoPauseOtherClips) 
+                    window.postMessage({"type":"NCTCL", "event":"pause", "clipId":$e.attr("id")}, "https://cafe.naver.com");
             });
 
             // 종료 이벤트
             video.addEventListener("ended", (e) => {
                 DEBUG("twitch clip ended()", e);
-                if(NCTCL_SETTINGS.autoPlayNextClip) window.postMessage({"type":"NCTCL", "event":"ended", "clipId":clipId}, "https://cafe.naver.com");
+                if(NCTCL_SETTINGS.autoPlayNextClip) 
+                    window.postMessage({"type":"NCTCL", "event":"ended", "clipId":$e.attr("id")}, "https://cafe.naver.com");
             });
 
-            // setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
+            // TODO: setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
             var is_volume_changed = false;
             if(NCTCL_SETTINGS.setVolumeWhenStreamStarts && !is_volume_changed){
                 if(video.volume !== undefined){
@@ -493,117 +467,183 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         });
 
         // 오리지널 링크를 제거하는 함수
-        var removeOriginalLinks = function(url){
-            if(!NCTCL_SETTINGS.use) return;
-            if(!NCTCL_SETTINGS.removeOriginalLinks) return;
-            try{
-                var $as = $(mainContent).find("a.se-link");
-                $as.each(function(i, v){
-                    var $a = $(v);
-                    var href = $a.attr("href");
-                    if(href !== url || $a.hasClass("fired")){
-                        return true;
-                    }
+        // var removeOriginalLinks = function(url){
+        //     if(!NCTCL_SETTINGS.use) return;
+        //     if(!NCTCL_SETTINGS.removeOriginalLinks) return;
+        //     try{
+        //         var $as = $(mainContent).find("a.se-link");
+        //         $as.each(function(i, v){
+        //             var $a = $(v);
+        //             var href = $a.attr("href");
+        //             if(href !== url || $a.hasClass("fired")){
+        //                 return true;
+        //             }
 
-                    var $p = $a.closest("p");
-                    if($p.text() === url){
-                        $p.remove();
-                    }
-                    else{
-                        $a.remove();
-                    }
-                });
-            }
-            catch(e){
-                DEBUG("Error from removeOriginalLinks", e);
-            }
-        }
+        //             var $p = $a.closest("p");
+        //             if($p.text() === url){
+        //                 $p.remove();
+        //             }
+        //             else{
+        //                 $a.remove();
+        //             }
+        //         });
+        //     }
+        //     catch(e){
+        //         DEBUG("Error from removeOriginalLinks", e);
+        //     }
+        // }
 
     
         // improvedRefresh : [실험적] 향상된 새로고침
-    function improvedRefresh(){
-        try{
-            DEBUG("improvedRefresh");
-            const $cafeMain = $("#cafe_main");
+        // if(NCTCL_SETTINGS.improvedRefresh){
+        //     try{
+        //         DEBUG("improvedRefresh");
+        //         const $cafeMain = $("#cafe_main");
 
-            // 카페 메인 컨텐츠를 불러 올 수 없다면 과정 취소
-            if($cafeMain.length === 0){
-                return;
-            }
+        //         // 카페 메인 컨텐츠를 불러 올 수 없다면 과정 취소
+        //         if($cafeMain.length === 0){
+        //             return;
+        //         }
 
-            var saveCurrentCafeMainUrl = function()
-            {
-                // 현재 페이지 위치를 저장
-                let lastCafeMainUrl = $cafeMain[0].contentWindow.location.href;
+        //         var saveCurrentCafeMainUrl = function()
+        //         {
+        //             // 현재 페이지 위치를 저장
+        //             let lastCafeMainUrl = $cafeMain[0].contentWindow.location.href;
+                    
+        //             DEBUG("save lastCafeMainUrl", lastCafeMainUrl);
+        //             localStorage.setItem('lastCafeMainUrl', JSON.stringify({
+        //                 "url":lastCafeMainUrl,
+        //                 "date":Number(new Date())
+        //             }));
+        //         }
+
+        //         if($cafeMain.attr('refreshed') !== "true"){
+        //             $cafeMain.attr('refreshed', 'true');
+        //             // 아래는 새로고침 시에 가장 마지막에 접속했던 주소와 url이 다르다면 리다이렉션을 합니다.
+        //             (() => {
+        //                 let savedLastCafeMainUrl = {url:undefined, date:-1};
+        //                 try{
+        //                     let savedLSLSCMU = localStorage.getItem('lastCafeMainUrl');
+        //                     if(savedLSLSCMU === null){
+        //                         DEBUG("savedLSLSCMU = null");
+        //                         return;
+        //                     }
+        //                     savedLastCafeMainUrl = JSON.parse(savedLSLSCMU);
+        //                 }
+        //                 catch(e){
+        //                     DEBUG("Error from improvedRefresh JSON.parse", e);
+        //                     return;
+        //                 }
+            
+        //                 DEBUG("savedLastCafeMainUrl", savedLastCafeMainUrl);
+        //                 if(document.location.href === savedLastCafeMainUrl.url /*|| 
+        //                     (document.location.href.match(/^https:\/\/cafe.naver.com\/\\w*$/) !== null 
+        //                     && savedLastCafeMainUrl.url.indexOf("https://cafe.naver.com/MyCafeIntro.nhn") !== -1)*/
+        //                 ){
+        //                     DEBUG("저장된 url 과 현재 url 이 같다", savedLastCafeMainUrl.url);
+        //                     return;
+        //                 }
+
+        //                 var exceptUrl = ["https://cafe.naver.com/MyCafeListGNBView.nhn"];
+        //                 for(var i=0;i<exceptUrl.length;i++){
+        //                     if(document.location.href.indexOf(exceptUrl[i]) !== -1){
+        //                         DEBUG("예외 목록에 포함된 URL", exceptUrl[i], document.location.href);
+        //                         return;
+        //                     }
+        //                 }
                 
-                DEBUG("save lastCafeMainUrl", lastCafeMainUrl);
-                localStorage.setItem('lastCafeMainUrl', JSON.stringify({
-                    "url":lastCafeMainUrl,
-                    "date":Number(new Date())
-                }));
-            }
-
-            if($cafeMain.attr('refreshed') !== "true"){
-                $cafeMain.attr('refreshed', 'true');
-                // 아래는 새로고침 시에 가장 마지막에 접속했던 주소와 url이 다르다면 리다이렉션을 합니다.
-                (() => {
-                    let savedLastCafeMainUrl = {url:undefined, date:-1};
-                    try{
-                        let savedLSLSCMU = localStorage.getItem('lastCafeMainUrl');
-                        if(savedLSLSCMU === null){
-                            DEBUG("savedLSLSCMU = null");
-                            return;
-                        }
-                        savedLastCafeMainUrl = JSON.parse(savedLSLSCMU);
-                    }
-                    catch(e){
-                        DEBUG("Error from improvedRefresh JSON.parse", e);
-                        return;
-                    }
-        
-                    DEBUG("savedLastCafeMainUrl", savedLastCafeMainUrl);
-                    if(document.location.href === savedLastCafeMainUrl.url /*|| 
-                        (document.location.href.match(/^https:\/\/cafe.naver.com\/\\w*$/) !== null 
-                        && savedLastCafeMainUrl.url.indexOf("https://cafe.naver.com/MyCafeIntro.nhn") !== -1)*/
-                    ){
-                        DEBUG("저장된 url 과 현재 url 이 같다", savedLastCafeMainUrl.url);
-                        return;
-                    }
-
-                    var exceptUrl = ["https://cafe.naver.com/MyCafeListGNBView.nhn"];
-                    for(var i=0;i<exceptUrl.length;i++){
-                        if(document.location.href.indexOf(exceptUrl[i]) !== -1){
-                            DEBUG("예외 목록에 포함된 URL", exceptUrl[i], document.location.href);
-                            return;
-                        }
-                    }
+        //                 const parentWindowRefreshed = String(window.top.performance.getEntriesByType("navigation")[0].type) === "reload";
+        //                 let refreshDelay = Number(new Date()) - savedLastCafeMainUrl.date;
+                
+        //                 DEBUG("PARENT REFRESHED? = ", parentWindowRefreshed, "CURRENT URL = ", document.location.href, ", REFRESHDELAY = ", refreshDelay);
             
-                    const parentWindowRefreshed = String(window.top.performance.getEntriesByType("navigation")[0].type) === "reload";
-                    let refreshDelay = Number(new Date()) - savedLastCafeMainUrl.date;
-            
-                    DEBUG("PARENT REFRESHED? = ", parentWindowRefreshed, "CURRENT URL = ", document.location.href, ", REFRESHDELAY = ", refreshDelay);
-        
-                    if(parentWindowRefreshed && refreshDelay > 2000.0){
-                        DEBUG("LOAD SAVED IFRAME URL. CURRRENT URL = ", document.location.href, ", SAVED URL = ", savedLastCafeMainUrl.url);
-                        document.location.href = savedLastCafeMainUrl.url;
-                        return;
+        //                 if(parentWindowRefreshed && refreshDelay > 2000.0){
+        //                     DEBUG("LOAD SAVED IFRAME URL. CURRRENT URL = ", document.location.href, ", SAVED URL = ", savedLastCafeMainUrl.url);
+        //                     document.location.href = savedLastCafeMainUrl.url;
+        //                     return;
+        //                 }
+        //             })();
+        //             saveCurrentCafeMainUrl();
+        //             }
+        //             else{
+        //                 // 현재 페이지 위치를 저장
+        //                 saveCurrentCafeMainUrl();
+        //             }
+        //     }catch(e){
+        //         DEBUG("Error from improvedRefresh", e);
+        //     }
+        // }
+
+        // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
+        var parentHtml = parent.document.querySelector("html");
+        var lastScrollY = parentHtml.scrollTop;
+        var checkIsFullScreen = function(){ return document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen };
+        try{
+            if(NCTCL_SETTINGS.fixFullScreenScrollChange /*&& window.self !== window.top*/){
+                $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+                    var isFullScreen = checkIsFullScreen();
+                    DEBUG("FullScreen", isFullScreen);
+                    if(!isFullScreen){
+                        if(parentHtml.scrollTop !== lastScrollY){
+                            DEBUG("parentHtml.scrollTop = ", parentHtml.scrollTop, "lastScrollY = ", lastScrollY);
+                        }
+                        parentHtml.scrollTop = lastScrollY;
                     }
-                })();
-                saveCurrentCafeMainUrl();
-            }
-            else{
-                // 현재 페이지 위치를 저장
-                saveCurrentCafeMainUrl();
+                });
+
+                $(parent.window).scroll(function() {
+                    var isFullScreen = checkIsFullScreen();
+                    if(!isFullScreen){
+                        lastScrollY = parentHtml.scrollTop;
+                    }
+                });
             }
         }
         catch(e){
-            DEBUG("Error from improvedRefresh", e);
+            DEBUG("Error from fixFullScreenScrollChange", e);
         }
-    }
-        
-    if(NCTCL_SETTINGS.improvedRefresh){
-        improvedRefresh();
-    }
+
+        if(NCTCL_SETTINGS.naverVideoAutoMaxQuality){
+            $(mainContent).arrive(".u_rmc_definition_ly", { existing: true }, function (elem) {
+                setTimeout(function(){
+                    try{
+                        DEBUG("TRY TO SET BEST QUALITY");
+                        var $elem = $(elem);
+                        var $u_rmcplayer = $elem.closest(".u_rmcplayer");
+                        if($u_rmcplayer.length === 0) {
+                            DEBUG("no $u_rmcplayer");
+                            return;
+                        }
+    
+                        if($u_rmcplayer.hasClass("_QSET")) {
+                            DEBUG("ALREADY QSET");
+                            return;
+                        }
+    
+                        var $qli = $(elem).find("li");
+                        if($qli.length > 2){
+                            var $last = $qli.last();
+                            if($last.hasClass("u_rmc_on")) {
+                                DEBUG("u_rmc_on - ALREADY QSET");
+                                return;
+                            }
+    
+                            DEBUG("BEST QUALITY SET", $last.text());
+                            $last.find("button").trigger("click");
+    
+                            $u_rmcplayer.addClass("_QSET");
+                        }
+                        else{
+                            DEBUG("no li elements for QSET");
+                        }
+    
+                    }
+                    catch(e){
+                        DEBUG("Error from naverVideoAutoMaxQuality arrive", e);
+                    }
+                }, 1);
+            });
+        }
     } // end loop.
 
 
