@@ -467,31 +467,31 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         });
 
         // 오리지널 링크를 제거하는 함수
-        // var removeOriginalLinks = function(url){
-        //     if(!NCTCL_SETTINGS.use) return;
-        //     if(!NCTCL_SETTINGS.removeOriginalLinks) return;
-        //     try{
-        //         var $as = $(mainContent).find("a.se-link");
-        //         $as.each(function(i, v){
-        //             var $a = $(v);
-        //             var href = $a.attr("href");
-        //             if(href !== url || $a.hasClass("fired")){
-        //                 return true;
-        //             }
+        var removeOriginalLinks = function(url){
+            if(!NCTCL_SETTINGS.use) return;
+            if(!NCTCL_SETTINGS.removeOriginalLinks) return;
+            try{
+                var $as = $(mainContent).find("a.se-link");
+                $as.each(function(i, v){
+                    var $a = $(v);
+                    var href = $a.attr("href");
+                    if(href !== url || $a.hasClass("fired")){
+                        return true;
+                    }
 
-        //             var $p = $a.closest("p");
-        //             if($p.text() === url){
-        //                 $p.remove();
-        //             }
-        //             else{
-        //                 $a.remove();
-        //             }
-        //         });
-        //     }
-        //     catch(e){
-        //         DEBUG("Error from removeOriginalLinks", e);
-        //     }
-        // }
+                    var $p = $a.closest("p");
+                    if($p.text() === url){
+                        $p.remove();
+                    }
+                    else{
+                        $a.remove();
+                    }
+                });
+            }
+            catch(e){
+                DEBUG("Error from removeOriginalLinks", e);
+            }
+        }
 
     
         // improvedRefresh : [실험적] 향상된 새로고침
