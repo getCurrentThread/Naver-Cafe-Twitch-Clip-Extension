@@ -343,6 +343,35 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
         });
 
+        // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
+        var parentHtml = parent.document.querySelector("html");
+        var lastScrollY = parentHtml.scrollTop;
+        var checkIsFullScreen = function(){ return document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen };
+        try{
+            if(NCTCL_SETTINGS.fixFullScreenScrollChange /*&& window.self !== window.top*/){
+                $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+                    var isFullScreen = checkIsFullScreen();
+                    DEBUG("FullScreen", isFullScreen);
+                    if(!isFullScreen){
+                        if(parentHtml.scrollTop !== lastScrollY){
+                            DEBUG("parentHtml.scrollTop = ", parentHtml.scrollTop, "lastScrollY = ", lastScrollY);
+                        }
+                        parentHtml.scrollTop = lastScrollY;
+                    }
+                });
+
+                $(parent.window).scroll(function() {
+                    var isFullScreen = checkIsFullScreen();
+                    if(!isFullScreen){
+                        lastScrollY = parentHtml.scrollTop;
+                    }
+                });
+            }
+        }
+        catch(e){
+            DEBUG("Error from fixFullScreenScrollChange", e);
+        }
+
         // 임베디드 비디오에 대한 추가 조정 (소리, 자동재생, 비디오 사이즈)
         $(mainContent).arrive("video", { onlyOnce: true, existing: true }, function (video) {
             DEBUG("video", video);

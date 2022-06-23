@@ -40,7 +40,7 @@ $(document).ready(function(){
                 const fn = function(){
                     const $this = $(this);
                     if($this.is(':checkbox'))
-                        $input.prop('disabled', !this.checked);
+                        $input.prop('disabled', !$this.prop('checked'));
                     else 
                         $input.prop('disabled', !($this.val() == tvalue));
                 }
@@ -84,7 +84,7 @@ $(document).ready(function(){
                 const fn = function(){
                     const $this = $(this);
                     if($this.is(':checkbox'))
-                        $input.prop('disabled', !this.checked);
+                        $input.prop('disabled', !$this.prop('checked'));
                     else 
                         $input.prop('disabled', !($this.val() == tvalue));
                 }
