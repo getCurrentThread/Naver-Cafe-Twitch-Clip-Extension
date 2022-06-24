@@ -10,6 +10,8 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         if(!mainContent) return;
 
 
+        // TODO : 스크롤 수정, 향상된 새로고침, 풀화면에서 돌아올 시에 화면 수정만 남기고 모두 이전
+
         // 클립 자동 정지 
         var autoPauseVideo = function(e){
             if(!NCTCL_SETTINGS.use) return;
