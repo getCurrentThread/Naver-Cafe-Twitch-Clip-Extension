@@ -39,7 +39,7 @@
         "matches": [
           "https://cafe.naver.com/*"
         ],
-        "css": [],
+        "css": ["top.css"],
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",
@@ -50,10 +50,11 @@
       },
       {
         "matches": [
-          "https://cafe.naver.com/MyCafeIntro.nhn*"
+          "https://cafe.naver.com/MyCafeIntro.nhn*",
+          "https://cafe.naver.com/ArticleRead.nhn*"
         ],
         "all_frames": true,
-        "css": [],
+        "css": ["main.css"],
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",
@@ -66,7 +67,7 @@
           "https://clips.twitch.tv/embed*"
         ],
         "all_frames": true,
-        "css": [],
+        "css": ["embed.css"],
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",

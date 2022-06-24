@@ -1,9 +1,0 @@
-html body .top-bar
-,[data-a-target="player-twitch-logo-button"]
-{
-    display:none !important;
-}
-html body .video-player__container
-,html body .video-player{
-    background:unset;
-}
