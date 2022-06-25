@@ -1,52 +1,43 @@
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
 
-    $(document).arrive("video", { existing: true }, function (video) {
-        const $video = $(video);
-        DEBUG("video", video);
-        $video.on("click", function (e) {
-            DEBUG("video click", e);
-            if ($video.prop("paused")) {
-                $video.prop("play");
-            } else {
-                $video.prop("pause");
-            }
-        });
-    });
+    // 비디오 영상을 클릭했을 시에 일시정지/재생을 할 수 있도록 기능 추가
+    // $(document).arrive("video", { existing: true }, function (video) {
+    //     const $video = $(video);
+    //     // DEBUG("video", video);
+    //     $video.on("click", function (e) {
+    //         DEBUG("video click", e);
+    //         if ($video.prop("paused")) {
+    //             $video.prop("play");
+    //         } else {
+    //             $video.prop("pause");
+    //         }
+    //     });
+    // });
 
     // 임베디드 비디오에 대한 추가 조정 (소리, 자동재생, 비디오 사이즈)
     $(document).arrive("video", { onlyOnce: true, existing: true }, function (video) {
-        DEBUG("video", video);
+        // DEBUG("video", video);
         
         // 재생 이벤트
         video.addEventListener("play", (e) => {
-            let $e = $(e.target);
             DEBUG("twitch clip play()", e);
-            if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip) 
-                window.postMessage({"type":"NCTCL", "event":"play", "clipId":$e.attr("id")}, "https://cafe.naver.com");
-            
-            if(!$e.hasClass("_FIRSTPLAYED")){
-                $e.addClass("_FIRSTPLAYED");
-                // // TODO: CSS 테마를 하단에 넣어야함
-                // addStyle(`
-                // html body .player-overlay-background--darkness-5{background:unset !important;}
-                // [data-a-target="player-overlay-play-button"]{display:none;}
-                // `);
-            }
+            if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip)
+                chrome.runtime.sendMessage({"type":"NCTCL", "event":"play", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, '')});
         });
 
         // 일시정지 이벤트
         video.addEventListener("pause", (e) => {
             DEBUG("twitch clip pause()", e);
-            if(NCTCL_SETTINGS.autoPauseOtherClips) 
-                window.postMessage({"type":"NCTCL", "event":"pause", "clipId":$(e.target).attr("id")}, "https://clips.twitch.tv");
+            if(NCTCL_SETTINGS.autoPauseOtherClips)
+                chrome.runtime.sendMessage({"type":"NCTCL", "event":"pause", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, '')});
         });
 
         // 종료 이벤트
         video.addEventListener("ended", (e) => {
             DEBUG("twitch clip ended()", e);
-            if(NCTCL_SETTINGS.autoPlayNextClip) 
-                window.postMessage({"type":"NCTCL", "event":"ended", "clipId":$(e.target).attr("id")}, "https://clips.twitch.tv");
+            if(NCTCL_SETTINGS.autoPlayNextClip)
+                chrome.runtime.sendMessage({"type":"NCTCL", "event":"ended", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, '')});
         });
 
         // TODO: setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
@@ -67,4 +58,31 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
         }
     });
+
+    // if window message is received, then do something
+    // window.addEventListener("message", function (event) {
+    //     DEBUG("window message", event);
+    //     if (event.origin !== "https://www.twitch.tv") {
+    //         return;
+    //     }
+    //     if (event.data.type === "NCTCL") {
+    //         DEBUG("window message", event.data);
+    //         if (event.data.event === "play") {
+    //             DEBUG("window message", event.data);
+    //             $("#" + event.data.clipId).prop("play");
+    //         } else if (event.data.event === "pause") {
+    //             DEBUG("window message", event.data);
+    //             $("#" + event.data.clipId).prop("pause");
+    //         }
+    
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            console.log(request, sender, sendResponse);
+            // console.log(sender.tab ?
+            //             "from a content script:" + sender.tab.url :
+            //             "from the extension");
+            // if (request.greeting === "hello")
+            //     sendResponse({farewell: "goodbye"});
+        }
+    );
 });
