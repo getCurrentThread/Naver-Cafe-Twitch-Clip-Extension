@@ -17,6 +17,22 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     "clipId":clipId, 
                     "origin": "twitch.tv"
                 });
+                // setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정 (바깥에 넣으니 적용이 잘 안되네)
+                if(NCTCL_SETTINGS.setVolumeWhenStreamStarts){
+                    if(video.volume !== undefined){
+                        DEBUG("MUTE?", video.muted, "CURRENT VOLUME", video.volume, "TARGET VOLUME", NCTCL_SETTINGS.targetStartVolume);
+                        // setTimeout(function(){
+                            if(NCTCL_SETTINGS.targetStartVolume !== 0.0){
+                                e.target.muted = false; // 기본 볼륨이 0아니라면 음소거를 해제해야 함
+                            }
+                            // 실제 볼륨 조절
+                            e.target.volume = NCTCL_SETTINGS.targetStartVolume;
+                            DEBUG("targetStartVolume", NCTCL_SETTINGS.targetStartVolume);
+                            DEBUG("video.volume = ", e.target.volume);
+                            // is_volume_changed = true;
+                        // }, 100);
+                    }
+                }
             });
 
             // 일시정지 이벤트
@@ -54,24 +70,6 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     }
                 }
             );
-        }
-
-        // TODO: setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
-        var is_volume_changed = false;
-        if(NCTCL_SETTINGS.setVolumeWhenStreamStarts && !is_volume_changed){
-            if(video.volume !== undefined){
-                DEBUG("MUTE?", video.muted, "CURRENT VOLUME", video.volume, "TARGET VOLUME", NCTCL_SETTINGS.targetStartVolume);
-                setTimeout(function(){
-                    if(NCTCL_SETTINGS.targetStartVolume !== 0.0){
-                        video.muted = false; // 기본 볼륨이 0아니라면 음소거를 해제해야 함
-                    }
-                    // 실제 볼륨 조절
-                    video.volume = NCTCL_SETTINGS.targetStartVolume;
-                    DEBUG("targetStartVolume", NCTCL_SETTINGS.targetStartVolume);
-                    DEBUG("video.volume = ", video.volume);
-                    is_volume_changed = true;
-                }, 100);
-            }
         }
     });
 
