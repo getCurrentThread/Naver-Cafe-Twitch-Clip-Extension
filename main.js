@@ -275,75 +275,62 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     }
 
 
-    // 클립 자동 정지 
-    var autoPauseVideo = function(e){
-    if(!NCTCL_SETTINGS.use) return;
-    if(!NCTCL_SETTINGS.autoPauseOtherClips && !NCTCL_SETTINGS.autoPlayNextClip) return;
-    if(e.origin === "twitch.tv" && e.data.type === "NCTCL"){
-        DEBUG("autoPauseVideo", e.data);
-        if(e.data.clipId === undefined || e.data.clipId === "") return;
-
-        var $iframes = $(document).find("div.NCTCL-container iframe");
-        var endedNextFound = false;
-        $iframes.each(function(i, v){
-            switch(e.data.event){
-                default:
-                    return false;
-                    // break;
-                case "play":
-                    if(!NCTCL_SETTINGS.autoPauseOtherClips) return false;
-                    if(v.dataset.clipId === e.data.clipId) return true;
-                    let newData = {"type":"NCTCL", "event":"pause", "clipId":e.data.clipId};
-                    // v.contentWindow.postMessage(newData, "https://clips.twitch.tv");
-                    chrome.runtime.sendMessage(newData);
-                    break;
-                case "ended":
-                    if(!NCTCL_SETTINGS.autoPlayNextClip) return false;
-                    if(endedNextFound){
-                        let newData = {"type":"NCTCL", "event":"play", "clipId":v.dataset.clipId};
-                        // v.contentWindow.postMessage(newData, "https://clips.twitch.tv");
-                        chrome.runtime.sendMessage(newData);
-                        return false;
-                    }
-                    if(v.dataset.clipId === e.data.clipId){
-                        endedNextFound = true;
-                        return true;
-                    }
-            }
-        });
-
-            // for naver video
-            if(!NCTCL_SETTINGS.autoPauseOtherClips || !NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo) return true;
-            if(e.data.event == "play"){
-                var $videos = $(document).find("video");
-                $videos.each(function(i, v){
-                    var $nvideo = $(v);
-                    var $id = $nvideo.attr("id");
-                    if(e.data.clipId == $id) return;
-                    if(!$nvideo.hasClass("_FIRSTPLAYED") || $nvideo[0].paused) return;
-
-                    var $sevideo = $nvideo.closest(".se-video");
-                    if ($sevideo.length == 0) {
-                        DEBUG("no se-video");
-                        return;
-                    }
-
-                    var $playbtn = $sevideo.find(".u_rmc_play_area button");
-                    if($playbtn.length == 0) {
-                        DEBUG("no playbtn");
-                        return;
-                    }
-
-                    $playbtn.trigger("click");
-                    DEBUG("NAVER VIDEO PAUSE");
+    // 클립 자동 정지 (네이버 동영상 전용)
+    if(NCTCL_SETTINGS.autoPauseOtherClips && NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo){
+        const nVideos = [];
+        $(document).arrive("video", {
+            onlyOnce: true,
+            existing: true
+            },function(video){
+                DEBUG("naver video", video);
+                // play
+                video.addEventListener("play", function(e){
+                    chrome.runtime.sendMessage({
+                        type: "NCTCL",
+                        event: "play",
+                        clipId: e.target.id,
+                        origin: "naver.com"
+                    });
                 });
+                //pause
+                video.addEventListener("pause", function(e){
+                    chrome.runtime.sendMessage({
+                        type: "NCTCL",
+                        event: "pause",
+                        clipId: e.target.id,
+                        origin: "naver.com"
+                    });
+                });
+                //ended
+                video.addEventListener("ended", function(e){
+                    chrome.runtime.sendMessage({
+                        type: "NCTCL",
+                        event: "ended",
+                        clipId: e.target.id,
+                        origin: "naver.com"
+                    });
+                });
+                nVideos.push(video);
             }
-        }
+        );
+
+        // 백그라운드에게 전달 받은 이벤트 처리 (주로 비디오 중지)
+        chrome.runtime.onMessage.addListener(
+            function(request, sender, sendResponse) {
+                DEBUG("main get message!", request, sender, sendResponse);
+                if(request.type === "NCTCL" && request.origin === "naver.com"){
+                    nVideos.forEach(function(video){
+                        if(video.id === request.clipId){
+                            if(request.event === "play"){
+                                video.play();
+                            }
+                            else if(request.event === "pause"){
+                                video.pause();
+                            }
+                        }
+                    });
+                }
+            }
+        );
     }
-
-    // 메시지 이벤트가 발생하는 경우에 클립 정지 이벤트 함수 호출
-    window.addEventListener("message", function(e){
-        autoPauseVideo(e);
-    });
-
 });

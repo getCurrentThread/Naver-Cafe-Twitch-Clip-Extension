@@ -2,6 +2,12 @@
 
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
+    // send settings to background.js
+    chrome.runtime.sendMessage({
+        "type":"NCTCLM",
+        "event":"update",
+        "settings":NCTCL_SETTINGS
+    });
     var loop = function(){
         if(!NCTCL_SETTINGS.use) return;
         // 내부 iframe의 document를 가져오기

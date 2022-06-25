@@ -6,26 +6,55 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     $(document).arrive("video", { onlyOnce: true, existing: true }, function (video) {
         // DEBUG("video", video);
         
-        // 재생 이벤트
-        video.addEventListener("play", (e) => {
-            DEBUG("twitch clip play()", e);
-            // if(NCTCL_SETTINGS.autoPauseOtherClips || NCTCL_SETTINGS.autoPlayNextClip)
-                chrome.runtime.sendMessage({"type":"NCTCL", "event":"play", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, ''), origin: "twitch.tv"});
-        });
+        if(NCTCL_SETTINGS.autoPauseOtherClips){
+            const clipId = video.baseURI.replace(/^.*clip=/, '').replace(/&.*/, '');
+            // 재생 이벤트
+            video.addEventListener("play", (e) => {
+                DEBUG("twitch clip play()", e);
+                chrome.runtime.sendMessage({
+                    "type":"NCTCL", 
+                    "event":"play", 
+                    "clipId":clipId, 
+                    "origin": "twitch.tv"
+                });
+            });
 
-        // 일시정지 이벤트
-        video.addEventListener("pause", (e) => {
-            DEBUG("twitch clip pause()", e);
-            // if(NCTCL_SETTINGS.autoPauseOtherClips)
-                chrome.runtime.sendMessage({"type":"NCTCL", "event":"pause", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, ''), origin: "twitch.tv"});
-        });
+            // 일시정지 이벤트
+            video.addEventListener("pause", (e) => {
+                DEBUG("twitch clip pause()", e);
+                chrome.runtime.sendMessage({
+                    "type":"NCTCL", 
+                    "event":"pause", 
+                    "clipId":clipId, 
+                    "origin": "twitch.tv"
+                });
+            });
 
-        // 종료 이벤트
-        video.addEventListener("ended", (e) => {
-            DEBUG("twitch clip ended()", e);
-            // if(NCTCL_SETTINGS.autoPlayNextClip)
-                chrome.runtime.sendMessage({"type":"NCTCL", "event":"ended", "clipId":e.target.baseURI.replace(/^.*clip=/, '').replace(/&.*/, ''), origin: "twitch.tv"});
-        });
+            // 종료 이벤트
+            video.addEventListener("ended", (e) => {
+                DEBUG("twitch clip ended()", e);
+                chrome.runtime.sendMessage({
+                    "type":"NCTCL", 
+                    "event":"ended", 
+                    "clipId":clipId, 
+                    "origin": "twitch.tv"
+                });
+            });
+
+            // 백그라운드에게 전달 받은 이벤트 처리 (주로 비디오 중지)
+            chrome.runtime.onMessage.addListener(
+                function(request, sender, sendResponse) {
+                    DEBUG("embed get message!", request, sender, sendResponse);
+                    if(request.type === "NCTCL" && request.clipId === clipId){
+                        if(request.event === "pause"){
+                            video.pause();
+                        }else if(request.event === "play"){
+                            video.play();
+                        }
+                    }
+                }
+            );
+        }
 
         // TODO: setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
         var is_volume_changed = false;
@@ -44,18 +73,6 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                 }, 100);
             }
         }
-
-        // 백그라운드에게 전달 받은 이벤트 처리 (주로 비디오 중지)
-        chrome.runtime.onMessage.addListener(
-            function(request, sender, sendResponse) {
-                console.log(request, sender, sendResponse);
-                // console.log(sender.tab ?
-                //             "from a content script:" + sender.tab.url :
-                //             "from the extension");
-                // if (request.greeting === "hello")
-                //     sendResponse({farewell: "goodbye"});
-            }
-        );
     });
 
 

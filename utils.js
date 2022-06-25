@@ -87,6 +87,7 @@ class NCTCLM{
     await saveObjectInLocalStorage({
       NCTCL_settings: NCTCLM.settings
     });
+    chrome.runtime.sendMessage({ type: "NCTCLM", event: "update", settings: NCTCLM.settings });
     DEBUG("[NCTCL] saveSettings", NCTCLM.settings);
   }
 
