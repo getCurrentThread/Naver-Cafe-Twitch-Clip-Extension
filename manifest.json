@@ -37,7 +37,7 @@
     "content_scripts": [
       {
         "matches": [
-          "https://cafe.naver.com/*"
+          "*://cafe.naver.com/*"
         ],
         "css": ["top.css"],
         "js": [
@@ -50,8 +50,7 @@
       },
       {
         "matches": [
-          "https://cafe.naver.com/MyCafeIntro.nhn*",
-          "https://cafe.naver.com/ArticleRead.nhn*"
+          "*://cafe.naver.com/*"
         ],
         "all_frames": true,
         "css": ["main.css"],

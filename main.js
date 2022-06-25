@@ -1,4 +1,6 @@
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
+    // TODO : manifest에 상세한 match로 설정되어 있으면 가끔 먹통이 되는 문제가 발생하여 아래와 같이 예외처리함
+    if(window.name !== "cafe_main") return;
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
 
     // 콘텐츠 width 계산
@@ -277,11 +279,11 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     var autoPauseVideo = function(e){
     if(!NCTCL_SETTINGS.use) return;
     if(!NCTCL_SETTINGS.autoPauseOtherClips && !NCTCL_SETTINGS.autoPlayNextClip) return;
-    if(e.origin === "https://clips.twitch.tv" && e.data.type === "NCTCL"){
+    if(e.origin === "twitch.tv" && e.data.type === "NCTCL"){
         DEBUG("autoPauseVideo", e.data);
         if(e.data.clipId === undefined || e.data.clipId === "") return;
 
-        var $iframes = $(mainContent).find("div.NCTCL-container iframe");
+        var $iframes = $(document).find("div.NCTCL-container iframe");
         var endedNextFound = false;
         $iframes.each(function(i, v){
             switch(e.data.event){
@@ -313,7 +315,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             // for naver video
             if(!NCTCL_SETTINGS.autoPauseOtherClips || !NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo) return true;
             if(e.data.event == "play"){
-                var $videos = $(mainContent).find("video");
+                var $videos = $(document).find("video");
                 $videos.each(function(i, v){
                     var $nvideo = $(v);
                     var $id = $nvideo.attr("id");
