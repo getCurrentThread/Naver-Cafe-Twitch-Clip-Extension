@@ -1,6 +1,6 @@
 // document ready
 $(document).ready(function(){
-    // init the welcome page on input value.
+    // init the settings page on input value.
     (async () => {
         //get NCTCLM settings
         let settings = await NCTCLM.loadSettings();
@@ -25,7 +25,7 @@ $(document).ready(function(){
                 if($this.is(':checkbox'))
                     settings[key] = this.checked
                 else if($this.is('[type=number]'))
-                    settings[key] = parseInt($this.val());
+                    settings[key] = Number($this.val());
                 else
                     settings[key] = $this.val();
                 //save settings
@@ -40,7 +40,7 @@ $(document).ready(function(){
                 const fn = function(){
                     const $this = $(this);
                     if($this.is(':checkbox'))
-                        $input.prop('disabled', !this.checked);
+                        $input.prop('disabled', !$this.prop('checked'));
                     else 
                         $input.prop('disabled', !($this.val() == tvalue));
                 }
@@ -56,10 +56,10 @@ $(document).ready(function(){
     })();
 
     // number input type limit to min~max
-    $('input[type="number"]').on('input change keyup paste', function () {
-        if (this.min) this.value = Math.max(parseInt(this.min), parseInt(this.value) || 0);
-        if (this.max) this.value = Math.min(parseInt(this.max), parseInt(this.value) || 0);
-      });
+    $('input[type="number"]').on('change paste', function () {
+        if (this.min) this.value = Math.max(Number(this.min), Number(this.value) || 0);
+        if (this.max) this.value = Math.min(Number(this.max), Number(this.value) || 0);
+    });
 
     // if click on reset button, reset settings
     $('#reset').click(function(){
@@ -84,7 +84,7 @@ $(document).ready(function(){
                 const fn = function(){
                     const $this = $(this);
                     if($this.is(':checkbox'))
-                        $input.prop('disabled', !this.checked);
+                        $input.prop('disabled', !$this.prop('checked'));
                     else 
                         $input.prop('disabled', !($this.val() == tvalue));
                 }
