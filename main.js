@@ -1,7 +1,15 @@
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
+    if(!NCTCL_SETTINGS.use) return;
     // TODO : manifest에 상세한 match로 설정되어 있으면 가끔 먹통이 되는 문제가 발생하여 아래와 같이 예외처리함
     if(window.name !== "cafe_main") return;
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
+
+    // chrome extension inject main.css file
+    const topCss = chrome.runtime.getURL("main.css");
+    const topCssLink = document.createElement("link");
+    topCssLink.setAttribute("rel", "stylesheet");
+    topCssLink.setAttribute("href", topCss);
+    document.head.appendChild(topCssLink);
 
     // 콘텐츠 width 계산
     var contentWidth = 800;

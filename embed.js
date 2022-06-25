@@ -1,6 +1,13 @@
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
+    if(!NCTCL_SETTINGS.use) return;
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
 
+    // chrome extension inject embed.css file
+    const topCss = chrome.runtime.getURL("embed.css");
+    const topCssLink = document.createElement("link");
+    topCssLink.setAttribute("rel", "stylesheet");
+    topCssLink.setAttribute("href", topCss);
+    document.head.appendChild(topCssLink);
 
     // 임베디드 비디오에 대한 추가 조정 (소리, 자동재생, 비디오 사이즈)
     $(document).arrive("video", { onlyOnce: true, existing: true }, function (video) {
