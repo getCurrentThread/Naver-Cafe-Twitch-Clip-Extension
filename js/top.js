@@ -2,6 +2,9 @@
 
 NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
+    // check is window top
+    // if(window.top !== window) return;
+    // DEBUG("top window");
 
     // send settings to background.js
     chrome.runtime.sendMessage({
@@ -17,12 +20,8 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         if(!mainContent) return;
 
         // chrome extension inject top.css file
-        const topCss = chrome.runtime.getURL("top.css");
-        const topCssLink = document.createElement("link");
-        topCssLink.setAttribute("rel", "stylesheet");
-        topCssLink.setAttribute("href", topCss);
-        document.head.appendChild(topCssLink);
-
+        addStyleFromFile("css/top.css");
+        
         // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
         var parentHtml = parent.document.querySelector("html");
         var lastScrollY = parentHtml.scrollTop;

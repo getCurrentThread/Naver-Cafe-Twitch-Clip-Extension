@@ -109,3 +109,11 @@ function addStyle(css) {
   document.getElementsByTagName('head')[0].appendChild(style);
   return style;
 }
+
+function addStyleFromFile(css){
+  const topCss = chrome.runtime.getURL(css);
+  const topCssLink = document.createElement("link");
+  topCssLink.setAttribute("rel", "stylesheet");
+  topCssLink.setAttribute("href", topCss);
+  return document.head.appendChild(topCssLink);
+}

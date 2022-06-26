@@ -6,16 +6,16 @@
     "version": "0.1.1.5",
     "author": "getCurrentThread",
     "action": {
-      "default_icon": "images/thumbnail.png",
-      "default_popup": "popup.html"
+      "default_icon": "assets/thumbnail.png",
+      "default_popup": "html/popup.html"
     },
     "icons": {
-      "16": "images/thumbnail.png",
-      "48": "images/thumbnail.png",
-      "128": "images/thumbnail.png"
+      "16": "assets/thumbnail.png",
+      "48": "assets/thumbnail.png",
+      "128": "assets/thumbnail.png"
     },
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "js/background.js"
     },
     "permissions": [
       "storage"
@@ -25,15 +25,16 @@
         "matches": ["<all_urls>"],
         "resources": [
           "lib/jquery-3.6.0.min.js",
+          "lib/arrive.min.js",
           "lib/bootstrap.min.css",
-          "utils.js",
-          "popup.html",
-          "popup.js",
-          "settings.html",
-          "settings.js",
-          "top.css",
-          "main.css",
-          "embed.css"
+          "js/utils.js",
+          "html/popup.html",
+          "js/popup.js",
+          "html/settings.html",
+          "js/settings.js",
+          "css/top.css",
+          "css/main.css",
+          "css/embed.css"
         ]
       }
     ],
@@ -46,8 +47,8 @@
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",
-          "utils.js",
-          "top.js"
+          "js/utils.js",
+          "js/top.js"
         ],
         "run_at": "document_idle"
       },
@@ -60,9 +61,10 @@
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",
-          "utils.js",
-          "main.js"
-        ]
+          "js/utils.js",
+          "js/main.js"
+        ],
+        "run_at": "document_idle"
       },
       {
         "matches": [
@@ -73,9 +75,10 @@
         "js": [
           "lib/jquery-3.6.0.min.js",
           "lib/arrive.min.js",
-          "utils.js",
-          "embed.js"
-        ]
+          "js/utils.js",
+          "js/embed.js"
+        ],
+        "run_at": "document_idle"
       }
     ]
   }
