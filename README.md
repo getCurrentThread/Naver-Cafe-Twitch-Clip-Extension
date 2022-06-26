@@ -14,15 +14,15 @@
 
 - 아래 그림과 같이 Twitch Clip 의 섬네일이 있는 링크를 재생 가능한 비디오로 변환해줍니다.
 
-![Preview](/images/NCTCL_preview_01.png)
+![Preview](/assets/NCTCL_preview_01.png)
 
-![Open Settings Menu](/images/NCTCL_preview_02.png)
+![Open Settings Menu](/assets/NCTCL_preview_02.png)
 
-![Settings](/images/NCTCL_preview_03.png)
+![Settings](/assets/NCTCL_preview_03.png)
 
 ## Install
 
-[![Install](/images/NCTCL_install.png)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+[![Install](/assets/NCTCL_install.png)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
 
 ## Bug report
 
@@ -59,4 +59,4 @@
 
 ## 스크립트 원작자 후원 링크 배너 ( @nomomo )
 
-<a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img src="images/default-yellow.png" alt="Buy Me A Coffee" height="60"></a>　<a href="https://toon.at/donate/636947867320352181" target="_blank"><img src="images/toonation_b11.gif" height="60" alt="Donate with Toonation" /></a>
+<a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img src="assets/default-yellow.png" alt="Buy Me A Coffee" height="60"></a>　<a href="https://toon.at/donate/636947867320352181" target="_blank"><img src="assets/toonation_b11.gif" height="60" alt="Donate with Toonation" /></a>
