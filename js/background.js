@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener(
         if(request.type === "NCTCL"){
             // 익스텐션 처리 옵션이 꺼져 있는 경우 처리하지 않음
             console.log("request", request);
-            if(!NCTCL_SETTINGS.used) return;
+            if(!NCTCL_SETTINGS.use) return;
             // 네이버 동영상에 대한 옵션이 꺼져 있는 경우에는 네이버 동영상 메시지를 처리하지 않음
             if(!NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo && request.origin === "naver.com") return;
             if(request.event === "play"){
