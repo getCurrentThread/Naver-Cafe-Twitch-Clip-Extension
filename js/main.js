@@ -279,6 +279,30 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         });
     }
 
+    // improvedRefresh
+    if(NCTCL_SETTINGS.improvedRefresh){
+        (() =>{
+            try{
+                // 현재 메인 컨텐츠 주소로 저장한다.
+                history.replaceState(null, null, document.location.href);
+
+                // 조금 더 깔끔한 주소로 변경한다.
+                $(document).arrive('a#spiButton.naver-splugin',  {
+                    existing: true
+                },function(spiBtn){
+                    const lastCafeMainUrl = spiBtn.getAttribute('data-url');
+                    DEBUG("lastCafeMainUrl", lastCafeMainUrl);
+                    if(lastCafeMainUrl != null){
+                        DEBUG("SAVE LAST URL. CURRENT URL = ", document.location.href, ", LAST URL = ", lastCafeMainUrl);
+                        history.replaceState(null, null, lastCafeMainUrl);
+                    }
+                });
+            }
+            catch(e){
+                DEBUG("Error from improvedRefresh", e);
+            }
+        })();
+    }
 
     // 클립 자동 정지 (네이버 동영상 전용)
     if(NCTCL_SETTINGS.autoPauseOtherClips && NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo){
