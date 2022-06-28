@@ -284,7 +284,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         (() =>{
             try{
                 // 현재 메인 컨텐츠 주소로 저장한다.
-                history.replaceState(null, null, document.location.href);
+                window.parent.history.replaceState(null, null, document.location.href);
 
                 // 조금 더 깔끔한 주소로 변경한다.
                 $(document).arrive('a#spiButton.naver-splugin',  {
@@ -294,7 +294,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     DEBUG("lastCafeMainUrl", lastCafeMainUrl);
                     if(lastCafeMainUrl != null){
                         DEBUG("SAVE LAST URL. CURRENT URL = ", document.location.href, ", LAST URL = ", lastCafeMainUrl);
-                        history.replaceState(null, null, lastCafeMainUrl);
+                        window.parent.history.replaceState(null, null, lastCafeMainUrl);
                     }
                 });
             }
