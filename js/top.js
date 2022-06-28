@@ -9,26 +9,25 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         "event":"update",
         "settings":NCTCL_SETTINGS
     });
+
+    if(!NCTCL_SETTINGS.use) return;
+
+    // chrome extension inject top.css file
+    addStyleFromFile("css/top.css");
+
     var loop = function(){
         if(!NCTCL_SETTINGS.use) return;
         // 내부 iframe의 document를 가져오기
         const mainContent = document.querySelector("iframe#cafe_main")?.contentDocument;
         DEBUG("mainContent", mainContent);
         if(!mainContent) return;
-
-        // chrome extension inject top.css file
-        const topCss = chrome.runtime.getURL("top.css");
-        const topCssLink = document.createElement("link");
-        topCssLink.setAttribute("rel", "stylesheet");
-        topCssLink.setAttribute("href", topCss);
-        document.head.appendChild(topCssLink);
-
+        
         // fixFullScreenScrollChange 전체 화면에서 돌아올 때에 잘못된 스크롤 위치를 조정하는 기능을 추가한다.
         var parentHtml = parent.document.querySelector("html");
         var lastScrollY = parentHtml.scrollTop;
         var checkIsFullScreen = function(){ return document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen };
         try{
-            if(NCTCL_SETTINGS.fixFullScreenScrollChange /*&& window.self !== window.top*/){
+            if(NCTCL_SETTINGS.fixFullScreenScrollChange){
                 $(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
                     var isFullScreen = checkIsFullScreen();
                     DEBUG("FullScreen", isFullScreen);

@@ -3,14 +3,11 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     // TODO : manifest에 상세한 match로 설정되어 있으면 가끔 먹통이 되는 문제가 발생하여 아래와 같이 예외처리함
     if(window.name !== "cafe_main") return;
     DEBUG("NCTCLM.loadSettings", NCTCL_SETTINGS);
+    DEBUG("main window");
 
     // chrome extension inject main.css file
-    const topCss = chrome.runtime.getURL("main.css");
-    const topCssLink = document.createElement("link");
-    topCssLink.setAttribute("rel", "stylesheet");
-    topCssLink.setAttribute("href", topCss);
-    document.head.appendChild(topCssLink);
-
+    addStyleFromFile("css/main.css");
+    
     // 콘텐츠 width 계산
     var contentWidth = 800;
     var videoWidth, videoHeight, videoWidthStr, videoHeightStr;
@@ -282,6 +279,30 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         });
     }
 
+    // improvedRefresh
+    if(NCTCL_SETTINGS.improvedRefresh){
+        (() =>{
+            try{
+                // 현재 메인 컨텐츠 주소로 저장한다.
+                window.parent.history.replaceState(null, null, document.location.href);
+
+                // 조금 더 깔끔한 주소로 변경한다.
+                $(document).arrive('a#spiButton.naver-splugin',  {
+                    existing: true
+                },function(spiBtn){
+                    const lastCafeMainUrl = spiBtn.getAttribute('data-url');
+                    DEBUG("lastCafeMainUrl", lastCafeMainUrl);
+                    if(lastCafeMainUrl != null){
+                        DEBUG("SAVE LAST URL. CURRENT URL = ", document.location.href, ", LAST URL = ", lastCafeMainUrl);
+                        window.parent.history.replaceState(null, null, lastCafeMainUrl);
+                    }
+                });
+            }
+            catch(e){
+                DEBUG("Error from improvedRefresh", e);
+            }
+        })();
+    }
 
     // 클립 자동 정지 (네이버 동영상 전용)
     if(NCTCL_SETTINGS.autoPauseOtherClips && NCTCL_SETTINGS.autoPauseOtherClipsForNaverVideo){

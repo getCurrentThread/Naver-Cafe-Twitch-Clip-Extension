@@ -7,22 +7,22 @@
 
 > 해당 레포는 다음의 forked 입니다 : [nomomo/Naver-Cafe-Twitch-Clip-Loader](https://github.com/nomomo/Naver-Cafe-Twitch-Clip-Loader)
 
-- 본 UserScript 는 네이버 카페 글에서 Twitch 클립 링크를 재생 가능한 비디오로 변환해줍니다. (엄청 편하다!)
+- 본 익스텐션은 네이버 카페 글에서 Twitch 클립 링크를 재생 가능한 비디오로 변환해줍니다. (엄청 편하다!)
 - 설정에서 링크를 비디오로 변환할 시점을 선택할 수 있습니다. (페이지 로딩 시 자동 변환 or 섬네일 링크 클릭 시 변환)
 
 ## Preview
 
 - 아래 그림과 같이 Twitch Clip 의 섬네일이 있는 링크를 재생 가능한 비디오로 변환해줍니다.
 
-![Preview](/images/NCTCL_preview_01.png)
+![Preview](/assets/NCTCL_preview_01.png)
 
-![Open Settings Menu](/images/NCTCL_preview_02.png)
+![Open Settings Menu](/assets/NCTCL_preview_02.png)
 
-![Settings](/images/NCTCL_preview_03.png)
+![Settings](/assets/NCTCL_preview_03.png)
 
 ## Install
 
-[![Install](/images/NCTCL_install.png)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
+[![Install](/assets/NCTCL_install.png)](https://chrome.google.com/webstore/detail/anfmlkmmakldmlaboibhmmfnjgmpbffc)
 
 ## Bug report
 
@@ -30,6 +30,13 @@
 - wak8835@gmail.com
 
 ## Change log
+
+### 0.1.1 - Jun. 25, 2022
+- 표시되는 CSS 디자인 변경
+- 네이버 동영상을 최대 화질로 재생하는 기능 추가
+- 다른 클립 재생 시 이전 영상 중지 기능 추가
+- 트위치 스타일로 재생하는 기능 추가
+- 전체 화면 시 스크롤 오류 처리 기능 추가
 
 ### 0.1.0 - Jun. 09, 2022
 
@@ -52,4 +59,4 @@
 
 ## 스크립트 원작자 후원 링크 배너 ( @nomomo )
 
-<a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img src="images/default-yellow.png" alt="Buy Me A Coffee" height="60"></a>　<a href="https://toon.at/donate/636947867320352181" target="_blank"><img src="images/toonation_b11.gif" height="60" alt="Donate with Toonation" /></a>
+<a href="https://www.buymeacoffee.com/nomomo" target="_blank"><img src="assets/default-yellow.png" alt="Buy Me A Coffee" height="60"></a>　<a href="https://toon.at/donate/636947867320352181" target="_blank"><img src="assets/toonation_b11.gif" height="60" alt="Donate with Toonation" /></a>
