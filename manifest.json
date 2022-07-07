@@ -35,7 +35,8 @@
           "css/settings.css",
           "css/top.css",
           "css/main.css",
-          "css/embed.css"
+          "css/embed.css",
+          "css/youtube.css"
         ]
       }
     ],
@@ -78,6 +79,20 @@
           "lib/arrive.min.js",
           "js/utils.js",
           "js/embed.js"
+        ],
+        "run_at": "document_idle"
+      },
+      {
+        "matches": [
+          "https://www.youtube.com/embed/*"
+        ],
+        "all_frames": true,
+        "css": [],
+        "js": [
+          "lib/jquery-3.6.0.min.js",
+          "lib/arrive.min.js",
+          "js/utils.js",
+          "js/youtube.js"
         ],
         "run_at": "document_idle"
       }

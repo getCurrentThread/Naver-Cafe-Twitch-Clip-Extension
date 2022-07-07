@@ -20,7 +20,7 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
                     "clipId":clipId, 
                     "origin": "twitch.tv"
                 });
-                // setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정 (바깥에 넣으니 적용이 잘 안되네)
+                // setVolumeWhenStreamStarts 비디오의 전체 볼륨을 수정
                 if(NCTCL_SETTINGS.setVolumeWhenStreamStarts){
                     if(video.volume !== undefined){
                         DEBUG("MUTE?", video.muted, "CURRENT VOLUME", video.volume, "TARGET VOLUME", NCTCL_SETTINGS.targetStartVolume);
