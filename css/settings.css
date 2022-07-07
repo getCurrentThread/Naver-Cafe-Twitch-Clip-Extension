@@ -1,0 +1,189 @@
+body #NCTCL_setting {
+    min-width:900px;
+}
+#NCTCL_setting .btn {
+    font-size: 12px;
+}
+#NCTCL_setting a {
+    color: #428bca;
+    text-decoration: none;
+}
+#NCTCL_setting a:hover,
+#NCTCL_setting a:focus {
+    color: #2a6496;
+    text-decoration: underline;
+}
+#NCTCL_setting {
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    font-size: 13px;
+    max-width: 1400px;
+    min-width: 750px;
+    box-sizing: content-box;
+}
+#NCTCL_setting_head {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0px 10px 10px;
+    font-size: 18px;
+    font-weight: 800;
+    max-width: 1400px;
+    min-width: 750px;
+    box-sizing: content-box;
+}
+#NCTCL_setting li {
+    list-style: none;
+    margin: 0px;
+    padding: 8px;
+    border-top: 1px solid #eee;
+}
+
+#NCTCL_setting .NCTCL_setting_depth1.NCTCL_setting_category {
+    border-top: 2px solid #999;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+#NCTCL_setting li[NCTCL_setting_key="version_check"] {
+    margin-top: 0px !important;
+}
+
+#NCTCL_setting .NCTCL_setting_category_name {
+    display: table-cell;
+    width: 110px;
+    padding: 0 0 0 0px;
+    font-weight: 700;
+    vertical-align: top;
+}
+#NCTCL_setting .NCTCL_setting_category_blank {
+    display: table-cell;
+    width: 110px;
+    padding: 0 0 0 0px;
+    vertical-align: top;
+}
+
+#NCTCL_setting .NCTCL_setting_list_head {
+    display: table-cell;
+    box-sizing: content-box;
+    vertical-align: top;
+}
+#NCTCL_setting .NCTCL_setting_depth1 .NCTCL_setting_list_head {
+    padding-left: 0px;
+    width: 370px;
+}
+#NCTCL_setting .NCTCL_setting_depth2 .NCTCL_setting_list_head {
+    padding-left: 30px;
+    width: 340px;
+}
+#NCTCL_setting .NCTCL_setting_depth3 .NCTCL_setting_list_head {
+    padding-left: 60px;
+    width: 310px;
+}
+#NCTCL_setting .NCTCL_setting_depth4 .NCTCL_setting_list_head {
+    padding-left: 90px;
+    width: 280px;
+}
+#NCTCL_setting .NCTCL_setting_depth5 .NCTCL_setting_list_head {
+    padding-left: 120px;
+    width: 250px;
+}
+
+#NCTCL_setting .NCTCL_setting_title {
+    display: block;
+    font-weight: 700;
+}
+#NCTCL_setting .NCTCL_setting_desc {
+    display: block;
+    font-size: 11px;
+}
+
+#NCTCL_setting .NCTCL_setting_input_container {
+    display: table-cell;
+    padding: 0 0 0 30px;
+    vertical-align: top;
+}
+#NCTCL_setting .NCTCL_setting_input_container span {
+    vertical-align: top;
+}
+#NCTCL_setting .NCTCL_setting_input_container span.btn {
+    margin: 0 0 0 10px;
+}
+#NCTCL_setting input {
+    display: inline;
+}
+#NCTCL_setting input[type="text"]
+,#NCTCL_setting input[type="number"] {
+    width: 100px;
+    height: 30px;
+    padding: 5px 5px;
+    font-size: 12px;
+}
+#NCTCL_setting textarea {
+    width: 250px;
+    height: 30px;
+    padding: 5px 5px;
+    font-size: 12px;
+}
+#NCTCL_setting input[type="checkbox"]
+,#NCTCL_setting input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+}
+#NCTCL_setting .radio-inline {
+    padding-left: 0;
+    padding-right: 10px;
+}
+#NCTCL_setting .radio-inline input {
+    margin: 0 5px 0 0;
+}
+#NCTCL_setting .invalid input,
+#NCTCL_setting .invalid textarea {
+    border-color: #dc3545;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    color: #dc3545;
+}
+#NCTCL_setting .invalid input:focus,
+#NCTCL_setting .invalid textarea:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    outline: 0;
+    color: #dc3545;
+}
+#NCTCL_setting .invalid {
+    color: #dc3545;
+}
+#NCTCL_setting .invalid_text {
+    font-size: 12px;
+    padding: 5px 0 0 5px;
+}
+
+#NCTCL_setting .NCTCL_setting_dev .NCTCL_setting_title {
+    color: #6441a5;
+    /* font-style: italic; */
+}
+#NCTCL_setting_footer {
+    padding: 30px 0 30px 0;
+    margin: 30px 0 0 0;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+#NCTCL_setting_footer .footer_divider {
+    margin: 0 5px;
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    background-color: #ebebeb;
+}
+body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: #eee;
+}
+body::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
