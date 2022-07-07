@@ -50,7 +50,12 @@ $(document).ready(function(){
             }
         });
 
-
+        // hidden infrequently used settings
+        if(settings.hideInfrequentlyFeature){
+            $("li[infrequent]").hide();
+        }else{
+            $("li[infrequent]").show();
+        }
         
         return;
     })();
@@ -59,6 +64,15 @@ $(document).ready(function(){
     $('input[type="number"]').on('change paste', function () {
         if (this.min) this.value = Math.max(Number(this.min), Number(this.value) || 0);
         if (this.max) this.value = Math.min(Number(this.max), Number(this.value) || 0);
+    });
+
+    // hidden infrequently used settings
+    $('input[name="hideInfrequentlyFeature"]').on('change', function(){
+        if(this.checked){
+            $("li[infrequent]").slideUp(1000);
+        }else{
+            $("li[infrequent]").slideDown(1000);
+        }
     });
 
     // if click on reset button, reset settings
