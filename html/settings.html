@@ -104,7 +104,7 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClip" class="NCTCL_setting_depth3">
+                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClip" class="NCTCL_setting_depth3" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">첫 번째 클립을 자동 재생</span><span class="NCTCL_setting_desc">페이지 로딩과 동시에 첫 번째 클립을 자동 재생합니다.</span></div>
                     <div class="NCTCL_setting_input_container form-group">
@@ -120,7 +120,7 @@
                         />
                     </div>
                 </li>
-                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClipMuted" class="NCTCL_setting_depth3">
+                <li NCTCL_setting_radio_enable_value="autoLoad" NCTCL_setting_key="autoPlayFirstClipMuted" class="NCTCL_setting_depth3" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head"><span class="NCTCL_setting_title">클립 자동 재생 시 클립 음소거</span><span class="NCTCL_setting_desc">클립 자동 재생 시 음소거 상태로 시작합니다.</span></div>
                     <div class="NCTCL_setting_input_container form-group">
@@ -192,7 +192,7 @@
                     </div>
                 </li>
                 <!-- 비디오 사이즈 지정 -->
-                <li NCTCL_setting_key="videoWidth" class="NCTCL_setting_depth1">
+                <li NCTCL_setting_key="videoWidth" class="NCTCL_setting_depth1" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">비디오 가로 사이즈(%)</span>
@@ -236,7 +236,7 @@
                     </div>
                 </li>
                 <!-- 네이버 비디오에도 적용 -->
-                <li gm_setting_key="autoPauseOtherClipsForNaverVideo" class="NCTCL_setting_depth2">
+                <li gm_setting_key="autoPauseOtherClipsForNaverVideo" class="NCTCL_setting_depth2" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">네이버 비디오에도 적용</span>
@@ -255,7 +255,7 @@
                     </div>
                 </li>
                 <!-- 유튜브 영상에도 적용 -->
-                <li gm_setting_key="autoPauseOtherClipsForYoutubeVideo" class="NCTCL_setting_depth2">
+                <li gm_setting_key="autoPauseOtherClipsForYoutubeVideo" class="NCTCL_setting_depth2" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">유튜브 영상에도 적용</span>
@@ -309,7 +309,7 @@
                         />
                     </div>
                 </li> -->
-                <li gm_setting_key="playAndPauseByClick" class="NCTCL_setting_depth1">
+                <li gm_setting_key="playAndPauseByClick" class="NCTCL_setting_depth1" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">Twitch Clip 페이지 스타일로 표시</span>
@@ -347,7 +347,7 @@
                     </div>
                 </li>
                 <!-- 전체화면 스크롤 동작 개선 -->
-                <li gm_setting_key="fixFullScreenScrollChange" class="NCTCL_setting_depth1">
+                <li gm_setting_key="fixFullScreenScrollChange" class="NCTCL_setting_depth1" infrequent>
                     <div class="NCTCL_setting_category_blank"></div>
                     <div class="NCTCL_setting_list_head">
                         <span class="NCTCL_setting_title">전체화면 스크롤 동작 개선</span>
@@ -362,6 +362,25 @@
                             spellcheck="false" 
                             type="checkbox"  
                             name="fixFullScreenScrollChange"
+                        />
+                    </div>
+                </li>
+                <!-- 전체화면 스크롤 동작 개선 -->
+                <li gm_setting_key="hideInfrequentlyFeature" class="NCTCL_setting_depth1">
+                    <div class="NCTCL_setting_category_blank"></div>
+                    <div class="NCTCL_setting_list_head">
+                        <span class="NCTCL_setting_title">자주 사용하지 않는 옵션을 숨기기</span>
+                        <span class="NCTCL_setting_desc">현재 설정 페이지에서 자주 사용하지 않는 옵션을 숨깁니다.</span>
+                    </div>
+                    <div class="NCTCL_setting_input_container form-group">
+                        <input 
+                            class="form-control" 
+                            autocomplete="off" 
+                            autocorrect="off" 
+                            autocapitalize="off" 
+                            spellcheck="false" 
+                            type="checkbox"  
+                            name="hideInfrequentlyFeature"
                         />
                     </div>
                 </li>
@@ -415,7 +434,7 @@
                     target="_blank">NCTC-Loader</a> v0.5.1
                  <div class="footer_divider"></div>
                  <a href="https://github.com/getCurrentThread/Naver-Cafe-Twitch-Clip-Extension"
-                    target="_blank">NCTC-Extension</a> v0.1.2.0
+                    target="_blank">NCTC-Extension</a> v0.1.2.1
                  <div class="footer_divider"></div>
                  ©2017-2022 <a href="https://nomo.asia/" target="_blank">NOMO</a>,
                  <a href="https://github.com/getCurrentThread" target="_blank">getCurrentThread</a>

@@ -66,7 +66,8 @@ const NCTCL_INIT_SETTINGS = {
   autoPlayNextClip: false,   // 자동으로 다음 클립을 이어서 재생
   playAndPauseByClick: true, // 트위치 클립 페이지 스타일로 표시
   fixFullScreenScrollChange: true, // 클립 페이지 스타일로 표시할 때 풀스크린 스크롤 이동 문제 해결
-  naverVideoAutoMaxQuality: true // 네이버 동영상 자동 최대 화질 설정
+  naverVideoAutoMaxQuality: true, // 네이버 동영상 자동 최대 화질 설정
+  hideInfrequentlyFeature: true // 자주 변경하지 않는 옵션은 설정에서 안보이게 하기
 }
 
 class NCTCLM{
