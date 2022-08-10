@@ -1,5 +1,4 @@
 .twitchClipFound .se-oglink-thumbnail.hoverPlayButton::before{
-    content: '▶️';
     font-size: 15vw;
     width: 16vw;
     height: 16vw;
