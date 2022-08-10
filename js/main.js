@@ -7,6 +7,8 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
 
     // chrome extension inject main.css file
     addStyleFromFile("css/main.css");
+    // fix for main.css file not encoding correctly '▶️'
+    addStyle(".twitchClipFound .se-oglink-thumbnail.hoverPlayButton::before{ content: '▶️'; }")
     
     // 콘텐츠 width 계산
     var contentWidth = 800;
