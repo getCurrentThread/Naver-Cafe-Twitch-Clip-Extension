@@ -1,5 +1,8 @@
+body {
+    padding: 0px 5px 5px;
+}
 body #NCTCL_setting {
-    min-width:900px;
+    min-width:785px;
 }
 #NCTCL_setting .btn {
     font-size: 12px;
@@ -182,7 +185,7 @@ body #NCTCL_setting {
 body::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background: #eee;
+    /* background: #eee; */
 }
 body::-webkit-scrollbar-thumb {
     background: #ccc;
