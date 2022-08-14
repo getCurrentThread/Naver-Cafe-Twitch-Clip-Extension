@@ -62,6 +62,7 @@ const NCTCL_INIT_SETTINGS = {
   autoPauseOtherClips: true,              // 자동으로 다른 클립 정지
   autoPauseOtherClipsForNaverVideo: true, // 자동으로 다른 클립 정지 (네이버 동영상)
   autoPauseOtherClipsForYoutubeVideo: true, // 자동으로 다른 클립 정지 (유튜브 동영상)
+  autoPauseOtherClipsForShareTabs: true,    // 자동으로 다른 클립 정지 (탭기준)
   removeOriginalLinks: true, // 오리지널 링크 삭제
   autoPlayNextClip: false,   // 자동으로 다음 클립을 이어서 재생
   playAndPauseByClick: true, // 트위치 클립 페이지 스타일로 표시
