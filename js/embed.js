@@ -146,4 +146,9 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             DEBUG("ERROR FROM playAndPauseByClick", e);
         }
     }
+
+    // hideClipPostplayRecommendations : 비디오의 추천 영상을 숨겨주는 기능
+    if(NCTCL_SETTINGS.hideClipPostplayRecommendations){
+        addStyle('.clip-postplay-recommendations a[href*="clips.twitch.tv"]{visibility:hidden !important;}'); 
+    }
 });
