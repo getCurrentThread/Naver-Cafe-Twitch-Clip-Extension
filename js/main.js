@@ -339,4 +339,28 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
             }
         );
     }
+
+    // refreshNaverVideoErrorOcurred : 네이버 비디오에 에러가 발생한 경우 리프레쉬 버튼을 추가
+    // TODO : it's not working... maybe replace more larger HTMLelement...
+    if(NCTCL_SETTINGS.refreshNaverVideoErrorOcurred){
+        $(document).arrive(".se-module.se-module-video > .u_rmcplayer", {existing: true}, function(elem){
+            elem = elem.parentElement;
+            console.log(elem);
+            const $elem = $(elem);
+            const id = $elem.attr("id").trim();
+            const content = elem.innerHTML;
+            console.log(content);
+            $elem.arrive(".u_rmcplayer_error_layer > .u_rmcplayer_error_container > .u_rmcplayer_error_box", {existing: true, onlyOnce: true}, function(box){
+                $(box).append(`<button 
+                style="margin: 10px; padding: 10px;width: auto; height: 40px; background: rgb(25,206,90);border: none; font-size: 15px; font-weight: bold; color: white;"
+                onclick="(() => { document.getElementById('${id}').innerHTML = decodeURIComponent(atob('${btoa(encodeURIComponent(content))}'));})();">새로고침</button>`);
+            });
+        });
+        // $(document).arrive(".u_rmcplayer_error_layer > .u_rmcplayer_error_container > .u_rmcplayer_error_box", { existing: true }, function (elem) {
+        //     let id = $(elem).closest('.se-module.se-module-video').attr('id').trim();
+        //     elem.innerHTML += `<button 
+        //     style="margin: 10px; padding: 10px;width: auto; height: 40px; background: rgb(25,206,90);border: none; font-size: 15px; font-weight: bold; color: white;"
+        //     onclick="(() => {let container = document.getElementById('${id}'); let content = container.innerHTML; container.innerHTML= content;})();">새로고침</button>`;
+        // });
+    }
 });

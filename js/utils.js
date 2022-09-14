@@ -72,6 +72,7 @@ const NCTCL_INIT_SETTINGS = {
   hideClipLiveRecommendations: true, // 트위치 라이브 방송 추천 안보이게 하기
   hideYoutubeEndScreenContents: true, // 유튜브 종료 후 추천 영상 안보이게 하기
   hideYoutubePauseOverlayContents: true, // 유튜브 일시정시 시 더보기 영상 안보이게 하기
+  refreshNaverVideoErrorOcurred: true, // 네이버 비디오에 에러가 발생한 경우 리프레쉬 버튼 추가
 }
 
 class NCTCLM{
