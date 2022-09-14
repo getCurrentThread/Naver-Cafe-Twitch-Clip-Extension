@@ -93,4 +93,13 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
         //     });
         // }
     });
+
+    // hideYoutubePauseOverlayContents : 유튜브 일시정지 시에 나오는 더보기 컨텐츠 숨김
+    if(NCTCL_SETTINGS.hideYoutubePauseOverlayContents){
+        addStyle('.ytp-expand-pause-overlay .ytp-pause-overlay{visibility: hidden;}')
+    }
+    // hideYoutubeEndScreenContents : 유튜브 영상 종료 후에 나오는 추천 컨텐츠 숨김
+    if(NCTCL_SETTINGS.hideYoutubeEndScreenContents){
+        addStyle('.ytp-endscreen-content{visibility: hidden;}');
+    }
 });
