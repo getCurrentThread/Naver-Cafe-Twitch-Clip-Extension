@@ -70,6 +70,7 @@ const NCTCL_INIT_SETTINGS = {
   hideInfrequentlyFeature: true, // 자주 변경하지 않는 옵션은 설정에서 안보이게 하기
   hideClipPostplayRecommendations: true, // 트위치 클립을 재생 후 보이는 추천 영상을 안보이게 하기
   hideClipLiveRecommendations: true, // 트위치 라이브 방송 추천 안보이게 하기
+  hideYoutubeVideoBannerAds : true, // 유튜브 배너 광고 숨김
   hideYoutubeEndScreenContents: true, // 유튜브 종료 후 추천 영상 안보이게 하기
   hideYoutubePauseOverlayContents: true, // 유튜브 일시정시 시 더보기 영상 안보이게 하기
 }
