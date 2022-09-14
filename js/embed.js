@@ -151,4 +151,9 @@ NCTCLM.loadSettings().then(NCTCL_SETTINGS => {
     if(NCTCL_SETTINGS.hideClipPostplayRecommendations){
         addStyle('.clip-postplay-recommendations a[href*="clips.twitch.tv"]{visibility:hidden !important;}'); 
     }
+
+    // hideClipLiveRecommendations : 해당 클립의 방송이 라이브 중이면 발생하는 추천 안내를 숨겨줍니다
+    if(NCTCL_SETTINGS.hideClipLiveRecommendations){
+        addStyle('.watch-live-prompt{visibility:hidden !important;}')
+    }
 });
